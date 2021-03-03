@@ -1,0 +1,195 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  color: #23272f;
+  font-family: 'Nunito', sans-serif;
+}
+
+.container {
+  background-color: #c9e0db;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: start;
+      align-content: flex-start;
+  margin: 0 auto;
+  padding: 41px 0;
+  max-width: 1024px;
+  min-height: 200vh;
+}
+
+.container > * {
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
+  margin: 0 16px;
+}
+
+.search {
+  position: relative;
+}
+
+.search__input {
+  font-size: 1.4rem;
+  border: none;
+  border-radius: 14px;
+  border-bottom-right-radius: 0;
+  height: 4.8rem;
+  width: 100%;
+  font-family: 'Nunito', sans-serif;
+  padding: 0 64px 0 24px;
+  color: #584c48;
+}
+
+.search__icon {
+  color: #584c48;
+  font-size: 2.2rem;
+  font-weight: 100;
+  height: 30px;
+  line-height: 30px;
+  position: absolute;
+  right: 16px;
+  text-align: center;
+  top: 8px;
+  width: 30px;
+}
+
+.header {
+  text-align: center;
+  margin: 24px 0 36px 0;
+}
+
+.header .header__hello {
+  font-size: 2.8rem;
+}
+
+.header__p {
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+
+.nav-status {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: white;
+  border-radius: 34.5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 4.8rem;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 24px;
+  padding: 8px;
+}
+
+.nav-status__element {
+  border-radius: 34.5px;
+  color: #3a3a40;
+  -ms-flex-preferred-size: 33%;
+      flex-basis: 33%;
+  font-size: 1.4rem;
+  font-weight: 700;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+}
+
+.nav-status__element .nav-status__link {
+  width: 80%;
+  display: inline-block;
+  color: #3a3a40;
+  text-decoration: none;
+}
+
+.nav-status__element .nav-status__link-active {
+  color: white;
+}
+
+.nav-status__element-active {
+  background-color: #ff7e41;
+  border-radius: 34.5px;
+}
+
+.task-list {
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
+}
+
+.task-list .task-list__task {
+  background-color: white;
+  border-radius: 26px;
+  color: #584c48;
+  margin: 16px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 24px;
+}
+
+.task-list .task-list__task .task-list__icon {
+  border: 2px solid #3296a0;
+  border-radius: 50%;
+  color: white;
+  height: 22px;
+  margin: 3px 0;
+  line-height: 20px;
+  text-align: center;
+  min-width: 22px;
+  width: 22px;
+}
+
+.task-list .task-list__task .task-list__icon-done {
+  background-color: #3296a0;
+  font-size: 12px;
+}
+
+.task-list .task-list__task .task-list__task-description {
+  font-size: 1.4rem;
+  line-height: 28px;
+  margin-left: 24px;
+}
+
+.task-list .task-list__task-done {
+  color: #b6b1ac;
+}
+
+.footer {
+  margin: 0;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
+.footer .footer__btn-add-task {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 16px;
+  width: 52px;
+  height: 52px;
+  line-height: 52px;
+  background-color: #23272f;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 4rem;
+  font-weight: 300;
+}
+/*# sourceMappingURL=main.min.css.map */

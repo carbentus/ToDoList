@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>To Do List</title>
+		<link rel="preconnect" href="https://fonts.gstatic.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+		/>
+		<link rel="stylesheet" href="/css/main.min.css" />
+	</head>
+	<body>
+		<div class="container">
+			<section class="search">
+				<input type="search" class="search__input" placeholder="Search task..." />
+				<div class="search__icon"><i class="fa fa-search" aria-hidden="true"></i></div>
+			</section>
+			<header class="header">
+				<h1 class="header__hello">Hello, Sarah</h1>
+				<p class="header__p">You're doing great this week!</p>
+			</header>
+			<nav class="nav-status">
+				<div class="nav-status__element nav-status__element-active">
+					<a href="" class="nav-status__link nav-status__link-active">All</a>
+				</div>
+				<div class="nav-status__element"><a href="" class="nav-status__link">Active</a></div>
+				<div class="nav-status__element"><a href="" class="nav-status__link">Completed</a></div>
+			</nav>
+
+			<!-- Task list -->
+			<section class="task-list">
+				<div class="task-list__task task-list__task-done">
+					<div class="task-list__icon task-list__icon-done">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+					<p class="task-list__task-description">Visit at the denstist.</p>
+				</div>
+				<div class="task-list__task">
+					<div class="task-list__icon">
+						<i class="fa fa-check task-list__icon-fa-check" aria-hidden="true"></i>
+					</div>
+					<p class="task-list__task-description">
+						Prepare a shopping list for the weekend trip (food, equipment, cosmetics)
+					</p>
+				</div>
+				<div class="task-list__task">
+					<div class="task-list__icon">
+						<i class="fa fa-check task-list__icon-fa-check" aria-hidden="true"></i>
+					</div>
+					<p class="task-list__task-description">Book flights</p>
+				</div>
+				<div class="task-list__task">
+					<div class="task-list__icon">
+						<i class="fa fa-check task-list__icon-fa-check" aria-hidden="true"></i>
+					</div>
+					<p class="task-list__task-description">
+						Take a dog to the wet. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic
+						debitis qui placeat nisi odio. Officiis corporis, iste aliquid.
+					</p>
+				</div>
+			</section>
+			<footer class="footer"><button class="footer__btn-add-task">+</button></footer>
+		</div>
+	</body>
+</html>
