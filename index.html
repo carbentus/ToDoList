@@ -21,7 +21,9 @@
 		<div class="container">
 			<section class="search">
 				<input type="search" class="search__input" placeholder="Search task..." />
-				<div class="search__icon"><i class="fa fa-search" aria-hidden="true"></i></div>
+				<div class="search__icon">
+					<i class="fa fa-search" aria-hidden="true"></i>
+				</div>
 			</section>
 			<header class="header">
 				<h1 class="header__hello">Hello, Sarah</h1>
@@ -67,7 +69,28 @@
 					</p>
 				</div>
 			</section>
-			<footer class="footer"><button class="footer__btn-add-task">+</button></footer>
+			<footer class="footer">
+				<button class="footer__btn-add-task btn-round">
+					<i class="fa fa-plus btn-round__icon" aria-hidden="true"></i>
+				</button>
+			</footer>
+
+			<div class="new-task-container new-task-container-hide">
+				<button class="new-task-container__btn-back-to-list">
+					<i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+					<p>Back to list</p>
+				</button>
+				<h1 class="new-task-container__title">Create new task</h1>
+				<textarea
+					class="new-task-container__input"
+					autofocus
+					placeholder="Write your task..."
+				></textarea>
+				<div class="new-task-container__bcg-for-btn">
+					<button class="new-task-container__btn-confirm">Add Task</button>
+				</div>
+			</div>
 		</div>
+		<script src="main.js"></script>
 	</body>
 </html>
