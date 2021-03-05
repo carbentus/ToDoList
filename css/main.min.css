@@ -120,7 +120,7 @@ body {
   padding: 8px;
 }
 
-.nav-status__element {
+.nav-status .nav-status__element {
   border-radius: 34.5px;
   color: #3a3a40;
   -ms-flex-preferred-size: 33%;
@@ -132,14 +132,14 @@ body {
   text-align: center;
 }
 
-.nav-status__element .nav-status__link {
+.nav-status .nav-status__element .nav-status__link {
   width: 80%;
   display: inline-block;
   color: #3a3a40;
   text-decoration: none;
 }
 
-.nav-status__element .nav-status__link-active {
+.nav-status .nav-status__element .nav-status__link-active {
   color: white;
 }
 
@@ -164,19 +164,24 @@ body {
   padding: 24px;
 }
 
-.task-list .task-list__task .task-list__icon {
+.task-list .task-list__task .task-list__checkbox {
+  opacity: 0;
+}
+
+.task-list .task-list__task .task-list__checkbox + label {
   border: 2px solid #3296a0;
   border-radius: 50%;
   color: white;
   height: 22px;
   margin: 3px 0;
   line-height: 20px;
+  cursor: pointer;
   text-align: center;
   min-width: 22px;
   width: 22px;
 }
 
-.task-list .task-list__task .task-list__icon-done {
+.task-list .task-list__task .task-list__checkbox:checked + label {
   background-color: #3296a0;
   font-size: 12px;
 }

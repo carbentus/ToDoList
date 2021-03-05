@@ -29,52 +29,56 @@
 				<h1 class="header__hello">Hello, Sarah</h1>
 				<p class="header__p">You're doing great this week!</p>
 			</header>
+
+			<!-- NAVIGATION   TABS -->
 			<nav class="nav-status">
-				<div class="nav-status__element nav-status__element-active">
-					<a href="" class="nav-status__link nav-status__link-active">All</a>
+				<div class="nav-status__element nav-status__element-active" id="tab-all">
+					<a href="#" class="nav-status__link nav-status__link-active">All</a>
 				</div>
-				<div class="nav-status__element"><a href="" class="nav-status__link">Active</a></div>
-				<div class="nav-status__element"><a href="" class="nav-status__link">Completed</a></div>
+				<div class="nav-status__element" id="tab-active">
+					<a href="#" class="nav-status__link">Active</a>
+				</div>
+				<div class="nav-status__element" id="tab-completed">
+					<a href="#" class="nav-status__link">Completed</a>
+				</div>
 			</nav>
 
 			<!-- Task list -->
 			<section class="task-list">
-				<div class="task-list__task task-list__task-done">
-					<div class="task-list__icon task-list__icon-done">
-						<i class="fa fa-check" aria-hidden="true"></i>
-					</div>
-					<p class="task-list__task-description">Visit at the denstist.</p>
-				</div>
-				<div class="task-list__task">
-					<div class="task-list__icon">
-						<i class="fa fa-check task-list__icon-fa-check" aria-hidden="true"></i>
-					</div>
-					<p class="task-list__task-description">
-						Prepare a shopping list for the weekend trip (food, equipment, cosmetics)
-					</p>
-				</div>
-				<div class="task-list__task">
-					<div class="task-list__icon">
-						<i class="fa fa-check task-list__icon-fa-check" aria-hidden="true"></i>
-					</div>
-					<p class="task-list__task-description">Book flights</p>
-				</div>
-				<div class="task-list__task">
-					<div class="task-list__icon">
-						<i class="fa fa-check task-list__icon-fa-check" aria-hidden="true"></i>
-					</div>
-					<p class="task-list__task-description">
-						Take a dog to the wet. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic
-						debitis qui placeat nisi odio. Officiis corporis, iste aliquid.
-					</p>
-				</div>
+				<ul>
+					<li class="task-list__task">
+						<input type="checkbox" class="task-list__checkbox" id="task_checkbox1" />
+						<label for="task_checkbox1"><i class="fa fa-check" aria-hidden="true"></i></label>
+						<p class="task-list__task-description">Visit at the denstist.</p>
+					</li>
+					<li class="task-list__task">
+						<input type="checkbox" class="task-list__checkbox" id="task_checkbox2" />
+						<label for="task_checkbox2"><i class="fa fa-check" aria-hidden="true"></i></label>
+						<p class="task-list__task-description">
+							Prepare a shopping list for the weekend trip (food, equipment, cosmetics)
+						</p>
+					</li>
+					<li class="task-list__task">
+						<input type="checkbox" class="task-list__checkbox" id="task_checkbox3" />
+						<label for="task_checkbox3"><i class="fa fa-check" aria-hidden="true"></i></label>
+						<p class="task-list__task-description">Book flights</p>
+					</li>
+					<li class="task-list__task">
+						<input type="checkbox" class="task-list__checkbox" id="task_checkbox4" />
+						<label for="task_checkbox4"><i class="fa fa-check" aria-hidden="true"></i></label>
+						<p class="task-list__task-description">
+							Take a dog to the wet. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic
+							debitis qui placeat nisi odio. Officiis corporis, iste aliquid.
+						</p>
+					</li>
+				</ul>
 			</section>
 			<footer class="footer">
 				<button class="footer__btn-add-task btn-round">
 					<i class="fa fa-plus btn-round__icon" aria-hidden="true"></i>
 				</button>
 			</footer>
-
+			<!--  NEW TASK CONTAINER -->
 			<div class="new-task-container new-task-container-hide">
 				<button class="new-task-container__btn-back-to-list">
 					<i class="fa fa-long-arrow-left" aria-hidden="true"></i>

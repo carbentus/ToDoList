@@ -96,6 +96,7 @@ body {
 	}
 }
 
+//  NAV
 .nav-status {
 	align-items: center;
 	background-color: white;
@@ -106,7 +107,7 @@ body {
 	margin-bottom: 24px;
 	padding: 8px;
 
-	&__element {
+	.nav-status__element {
 		border-radius: 34.5px;
 		color: #3a3a40;
 		flex-basis: 33%;
@@ -135,6 +136,7 @@ body {
 	}
 }
 
+// TASK LIST
 .task-list {
 	flex-basis: 100%;
 	.task-list__task {
@@ -146,19 +148,22 @@ body {
 		display: flex;
 		padding: 24px;
 
-		.task-list__icon {
+		.task-list__checkbox {
+			opacity: 0;
+		}
+		.task-list__checkbox + label {
 			border: 2px solid #3296a0;
 			border-radius: 50%;
 			color: white;
 			height: 22px;
 			margin: 3px 0;
 			line-height: 20px;
-			// margin: 6px;
+			cursor: pointer;
 			text-align: center;
 			min-width: 22px;
 			width: 22px;
 		}
-		.task-list__icon-done {
+		.task-list__checkbox:checked + label {
 			background-color: #3296a0;
 			font-size: 12px;
 		}
