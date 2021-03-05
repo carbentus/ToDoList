@@ -22,7 +22,7 @@ allCheckBox.forEach((checkBox) => {
 	});
 });
 
-// Navigation - TABS change (All/Active/Completed)
+// Navigation - Switch TABS  (All/Active/Completed)
 
 const allTabs = document.querySelectorAll('div.nav-status__element');
 const allTabsArray = [...allTabs];
@@ -50,11 +50,12 @@ allTabsArray.forEach((tab) => {
 			const activeTasks = document.querySelectorAll(
 				'li.task-list__task:not(.task-list__task-done)'
 			);
+
 			console.log('kliknales w Active');
 			console.log(activeTasks);
 		} else {
 			console.log('kliknales w COMPLETED');
-			const completedTasks = document.getElementsByClassName('task-list__task-done');
+			const completedTasks = document.querySelectorAll('li.task-list__task-done');
 			console.log(completedTasks);
 		}
 	});
