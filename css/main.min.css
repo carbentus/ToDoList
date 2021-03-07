@@ -120,7 +120,7 @@ body {
   padding: 8px;
 }
 
-.nav-status .nav-status__element {
+.nav-status .nav-status__btn {
   border-radius: 34.5px;
   color: #3a3a40;
   -ms-flex-preferred-size: 33%;
@@ -130,20 +130,14 @@ body {
   height: 36px;
   line-height: 36px;
   text-align: center;
-}
-
-.nav-status .nav-status__element .nav-status__link {
-  width: 80%;
-  display: inline-block;
+  cursor: pointer;
   color: #3a3a40;
-  text-decoration: none;
+  border: none;
+  outline: none;
 }
 
-.nav-status .nav-status__element .nav-status__link-active {
+.nav-status .nav-status__btn-active {
   color: white;
-}
-
-.nav-status__element-active {
   background-color: #ff7e41;
   border-radius: 34.5px;
 }

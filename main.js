@@ -10,13 +10,11 @@ const initList = () => {
 		loupe.classList.toggle('search__icon-inactive');
 	};
 
-	// Listener SHOW SEARCH INPUT
 	loupe.addEventListener('click', showSearchInput);
 
-	// Close the Task
+	// CLOSE THE TASK
 	const allCheckBox = document.querySelectorAll('input.task-list__checkbox');
 
-	// CLOSE the TASK
 	allCheckBox.forEach((checkBox) => {
 		checkBox.addEventListener('click', (ev) => {
 			const currentItem = ev.currentTarget;
@@ -37,21 +35,19 @@ const initList = () => {
 
 	// Navigation - Switch TABS  (All/Active/Completed)
 
-	// const allTabs = document.querySelectorAll('div.nav-status__element');
-	// const allTabsArray = [...allTabs];
+	const allTabs = document.querySelectorAll('.nav-status__btn');
+	const allTabsArray = [...allTabs];
 
-	// allTabsArray.forEach((tab) => {
-	// 	tab.addEventListener('click', (ev) => {
-	// 		const currentItem = ev.currentTarget;
+	allTabsArray.forEach((tab) => {
+		tab.addEventListener('click', (ev) => {
+			const currentItem = ev.currentTarget;
 
-	// 		allTabsArray.forEach((tab) => {
-	// 			tab.classList.remove('nav-status__element-active');
-	// 			tab.firstElementChild.classList.remove('nav-status__link-active');
-	// 		});
-	// 		currentItem.classList.add('nav-status__element-active');
-	// 		currentItem.firstElementChild.classList.add('nav-status__link-active');			
-	// 	});
-	// });
+			allTabsArray.forEach((tab) => {
+				tab.classList.remove('nav-status__btn-active');
+			});
+			currentItem.classList.add('nav-status__btn-active');
+		});
+	});
 };
 
 const renderList = (items) => {
@@ -64,18 +60,25 @@ const renderList = (items) => {
 			newChild.classList.add('task-list__task-done');
 		}
 		newChild.innerHTML = `
-			<input type="checkbox" class="task-list__checkbox" id="task_checkbox${item.id}"${item.isCompleted ? ' checked' : ''} data-id="${item.id}"/>
+			<input type="checkbox" class="task-list__checkbox" id="task_checkbox${item.id}"${
+			item.isCompleted ? ' checked' : ''
+		} data-id="${item.id}"/>
 			<label for="task_checkbox${item.id}"><i class="fa fa-check" aria-hidden="true"></i></label>
 			<p class="task-list__task-description">${item.text}</p>
-		`
+		`;
 		listContainer.appendChild(newChild);
 	});
 };
 
-const filterCompleted = () => {
-	renderList(tabData.filter(item => item.isCompleted));
+const filterActive = () => {
+	renderList(tabData.filter((item) => !item.isCompleted));
 	initList();
-}
+};
+
+const filterCompleted = () => {
+	renderList(tabData.filter((item) => item.isCompleted));
+	initList();
+};
 
 const showAll = () => {
 	renderList(tabData);
@@ -83,15 +86,17 @@ const showAll = () => {
 };
 
 const addItem = () => {
-	const id = tabData.length;
+	const id = tabData.length + 1;
 	tabData.push({
 		id,
-		isActive: false,
 		isCompleted: false,
-		text: "Fooo bar!"
+		text: 'Fooo bar!',
 	});
 	showAll();
-}
+};
+
+const tabActive = document.getElementById('tab-active');
+tabActive.addEventListener('click', filterActive);
 
 const tabCompleted = document.getElementById('tab-completed');
 tabCompleted.addEventListener('click', filterCompleted);

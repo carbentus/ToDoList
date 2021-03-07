@@ -107,7 +107,7 @@ body {
 	margin-bottom: 24px;
 	padding: 8px;
 
-	.nav-status__element {
+	.nav-status__btn {
 		border-radius: 34.5px;
 		color: #3a3a40;
 		flex-basis: 33%;
@@ -116,21 +116,13 @@ body {
 		height: 36px;
 		line-height: 36px;
 		text-align: center;
-
-		.nav-status__link {
-			width: 80%;
-			display: inline-block;
-
-			color: #3a3a40;
-			text-decoration: none;
-		}
-
-		.nav-status__link-active {
-			color: white;
-		}
+		cursor: pointer;
+		color: #3a3a40;
+		border: none;
+		outline: none;
 	}
-
-	&__element-active {
+	.nav-status__btn-active {
+		color: white;
 		background-color: #ff7e41;
 		border-radius: 34.5px;
 	}
