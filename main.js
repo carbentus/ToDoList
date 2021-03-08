@@ -97,6 +97,7 @@ const newTaskWindow = document.querySelector('.new-task-container');
 const plusBtn = document.querySelector('.footer__btn-add-task');
 plusBtn.addEventListener('click', () => {
 	newTaskWindow.classList.remove('new-task-container-hide');
+	document.body.style.overflow = 'hidden';
 });
 
 // ---- SEARCH TASK function
@@ -121,6 +122,7 @@ document.querySelector('.search__input').addEventListener('input', filterSearchT
 // Exit Add Task
 const closeNewTaskWindow = () => {
 	newTaskWindow.classList.add('new-task-container-hide');
+	document.body.style.overflow = 'visible';
 };
 const backToListBtn = document.querySelector('.new-task-container__btn-back-to-list');
 backToListBtn.addEventListener('click', closeNewTaskWindow);
@@ -132,7 +134,7 @@ const addTaskBtn = document.querySelector('.new-task-container__btn-confirm');
 // ADD NEW TASK   -
 
 const addItem = () => {
-	const newTaskTextInput = document.querySelector('.new-task-container__input');
+	const newTaskTextInput = document.querySelector('.new-task-container__textarea');
 	const newTaskText = newTaskTextInput.value;
 
 	const id = tabData.length + 1;

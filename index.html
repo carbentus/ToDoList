@@ -20,8 +20,16 @@
 	<body>
 		<div class="container">
 			<section class="search">
-				<input type="search" class="search__input" placeholder="Search task..." />
-				<button class="search__btn-loupe">
+				<input
+					type="text"
+					class="search__input search__input-active"
+					placeholder="Search task..."
+				/>
+				<button class="search_btn-back"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+				<button class="search_btn-clear">
+					<i class="fa fa-times-circle" aria-hidden="true"></i>
+				</button>
+				<button class="search__btn-loupe search__btn-loupe-inactive">
 					<i class="fa fa-search" aria-hidden="true"></i>
 				</button>
 			</section>
@@ -70,7 +78,6 @@
 				<button class="footer__btn-add-task btn-round">
 					<i class="fa fa-plus btn-round__icon" aria-hidden="true"></i>
 				</button>
-				<button class="footer__btn-add-test btn-round">Test</button>
 			</footer>
 			<!--  NEW TASK CONTAINER -->
 			<div class="new-task-container new-task-container-hide">
@@ -80,7 +87,7 @@
 				</button>
 				<h1 class="new-task-container__title">Create new task</h1>
 				<textarea
-					class="new-task-container__input"
+					class="new-task-container__textarea"
 					autofocus
 					placeholder="Write your task..."
 				></textarea>
