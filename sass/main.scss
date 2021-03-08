@@ -23,7 +23,9 @@ body {
 	margin: 0 auto;
 	padding: 41px 0;
 	max-width: 1024px;
+	width: 100vw;
 	min-height: 200vh;
+	overflow-x: hidden;
 
 	& > * {
 		// border: 1px solid orange;
@@ -59,7 +61,7 @@ body {
 		padding: 0 16px 0 24px;
 	}
 
-	.search__icon {
+	.search__btn-loupe {
 		display: block;
 		color: #f8f7f3;
 		background-color: #fdc32c;
@@ -75,9 +77,11 @@ body {
 		border-radius: 14px;
 		border-bottom-left-radius: 0;
 		filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+		border: none;
+		outline: none;
 	}
 
-	.search__icon-inactive {
+	.search__btn-loupe-inactive {
 		opacity: 0;
 	}
 }
@@ -111,7 +115,7 @@ body {
 		border-radius: 34.5px;
 		color: #3a3a40;
 		flex-basis: 33%;
-		font-size: 1.4rem;
+		font-size: 1.2rem;
 		font-weight: 700;
 		height: 36px;
 		line-height: 36px;
@@ -135,10 +139,11 @@ body {
 		background-color: white;
 		border-radius: 26px;
 		color: #584c48;
-		// min-height: 78px;
+		max-height: 132px;
 		margin: 16px 0;
 		display: flex;
 		padding: 24px;
+		max-width: 100%;
 
 		.task-list__checkbox {
 			opacity: 0;
@@ -161,9 +166,23 @@ body {
 		}
 
 		.task-list__task-description {
+			// display: inline-block;
+			// display: -webkit-box;
+			// -webkit-line-clamp: 3;
+			// -webkit-box-orient: vertical;
 			font-size: 1.4rem;
 			line-height: 28px;
 			margin-left: 24px;
+			max-width: 100%;
+			// max-width: 200px;
+			// max-height: 120px;
+			// text-overflow: ellipsis;
+			// white-space: nowrap;
+			// overflow: hidden;
+			// overflow-wrap: break-word;
+			// // word-wrap: break-word;
+			word-break: break-word;
+			// hyphens: auto;
 		}
 	}
 	.task-list__task-done {
@@ -196,6 +215,8 @@ body {
 		right: 0;
 		bottom: 0;
 		margin: 16px;
+		line-height: 55px;
+		outline: none;
 	}
 }
 
@@ -213,6 +234,7 @@ body {
 	position: fixed;
 	margin: 0;
 	padding: 40px 24px 0 24px;
+	transition: left 0.4s ease-in-out;
 
 	.new-task-container__btn-back-to-list {
 		flex-basis: auto;
@@ -232,6 +254,7 @@ body {
 	}
 
 	.new-task-container__title {
+		flex-basis: 100%;
 		margin: 24px 0;
 	}
 
@@ -243,6 +266,7 @@ body {
 		border: none;
 		border-radius: 20px;
 		font-family: 'Nunito', sans-serif;
+		font-size: 1.5rem;
 		max-width: 100%;
 		color: #584c48;
 		line-height: 24px;
@@ -277,5 +301,7 @@ body {
 	}
 }
 .new-task-container-hide {
-	display: none;
+	// display: none;
+	left: 150%;
+	transition: left 0.4s ease-in-out;
 }
