@@ -64,31 +64,40 @@ button {
 		height: 4.8rem;
 		font-family: 'Nunito', sans-serif;
 		color: #584c48;
-		transition: width 0.2s;
+		transition: width 0.05s;
 		background-color: #f8f7f3;
 	}
 
 	.search__input-active {
 		display: block;
 		width: 100%;
+
 		padding: 16px 48px;
 	}
+	.search__input-active:focus {
+		border: 1px solid #fdc32c;
+	}
 
-	.search_btn-back,
-	.search_btn-clear {
+	.search__btn-back,
+	.search__btn-clear {
+		visibility: hidden;
+	}
+
+	.search__btn-back-active,
+	.search__btn-clear-active {
 		position: absolute;
+		visibility: visible;
 		text-align: center;
 		font-size: 16px;
 		height: 48px;
 		width: 48px;
 	}
-
-	.search_btn-back {
+	.search__btn-back-active {
 		top: 0;
 		left: 0;
 		color: #584c48;
 	}
-	.search_btn-clear {
+	.search__btn-clear-active {
 		top: 0;
 		right: 0;
 		color: #b6b1ac;
@@ -110,10 +119,17 @@ button {
 		border-radius: 14px;
 		border-bottom-left-radius: 0;
 		filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+		transition: width 0.1s;
 	}
 
 	.search__btn-loupe-inactive {
-		opacity: 0;
+		// display: none;
+		width: 0;
+		visibility: hidden;
+
+		& > i {
+			display: none;
+		}
 	}
 }
 

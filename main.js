@@ -1,16 +1,28 @@
 let tabData = JSON.parse(document.querySelector('#data-source').innerHTML);
 
+const loupe = document.querySelector('.search__btn-loupe');
+const searchInput = document.querySelector('.search__input');
+const searchBackBtn = document.querySelector('.search__btn-back');
+const searchClearBtn = document.querySelector('.search__btn-clear');
 const initList = () => {
 	// Toggle SEARCH input
-	const loupe = document.querySelector('.search__btn-loupe');
-	const searchInput = document.querySelector('.search__input');
-
 	const showSearchInput = () => {
-		searchInput.classList.toggle('search__input-active');
-		// loupe.classList.toggle('search__btn-loupe-inactive');
+		searchInput.classList.add('search__input-active');
+		loupe.classList.add('search__btn-loupe-inactive');
+		searchBackBtn.classList.add('search__btn-back-active');
+		searchClearBtn.classList.add('search__btn-clear-active');
 	};
 
+	const closeSearchInput = () => {
+		searchInput.classList.remove('search__input-active');
+		loupe.classList.remove('search__btn-loupe-inactive');
+		searchBackBtn.classList.remove('search__btn-back-active');
+		searchClearBtn.classList.remove('search__btn-clear-active');
+	};
+	searchBackBtn.addEventListener('click', closeSearchInput);
 	loupe.addEventListener('click', showSearchInput);
+	// clear search input
+
 	// CLOSE THE TASK
 	const allCheckBox = document.querySelectorAll('input.task-list__checkbox');
 
@@ -93,17 +105,9 @@ tabCompleted.addEventListener('click', filterCompleted);
 const tabAll = document.getElementById('tab-all');
 tabAll.addEventListener('click', showAll);
 
-const newTaskWindow = document.querySelector('.new-task-container');
-const plusBtn = document.querySelector('.footer__btn-add-task');
-plusBtn.addEventListener('click', () => {
-	newTaskWindow.classList.remove('new-task-container-hide');
-	document.body.style.overflow = 'hidden';
-});
-
-// ---- SEARCH TASK function
+// --- start SEARCH TASK function
 const filterSearchTask = (ev) => {
 	const searchText = ev.target.value.toLowerCase();
-
 	if (tabActive.classList.contains('nav-status__btn-active')) {
 		renderList(
 			tabData.filter((item) => item.text.toLowerCase().includes(searchText) && !item.isCompleted)
@@ -117,9 +121,31 @@ const filterSearchTask = (ev) => {
 	}
 };
 document.querySelector('.search__input').addEventListener('input', filterSearchTask);
-// ----- end SEARCH TASK function
 
-// Exit Add Task
+// clear search input
+const clearSearchInput = () => {
+	searchInput.value = '';
+	if (tabActive.classList.contains('nav-status__btn-active')) {
+		filterActive();
+	} else if (tabCompleted.classList.contains('nav-status__btn-active')) {
+		filterCompleted();
+	} else {
+		showAll();
+	}
+};
+searchClearBtn.addEventListener('click', clearSearchInput);
+
+// --- end SEARCH TASK function
+
+// --- start  ADD TASK - show window
+const newTaskWindow = document.querySelector('.new-task-container');
+const plusBtn = document.querySelector('.footer__btn-add-task');
+plusBtn.addEventListener('click', () => {
+	newTaskWindow.classList.remove('new-task-container-hide');
+	document.body.style.overflow = 'hidden';
+});
+
+// Add Task - close window
 const closeNewTaskWindow = () => {
 	newTaskWindow.classList.add('new-task-container-hide');
 	document.body.style.overflow = 'visible';
@@ -127,11 +153,8 @@ const closeNewTaskWindow = () => {
 const backToListBtn = document.querySelector('.new-task-container__btn-back-to-list');
 backToListBtn.addEventListener('click', closeNewTaskWindow);
 
-//AddTask Confirm
-
+// --- ADD NEW TASK   -
 const addTaskBtn = document.querySelector('.new-task-container__btn-confirm');
-
-// ADD NEW TASK   -
 
 const addItem = () => {
 	const newTaskTextInput = document.querySelector('.new-task-container__textarea');
@@ -148,6 +171,8 @@ const addItem = () => {
 	showAll();
 };
 addTaskBtn.addEventListener('click', addItem);
+
+//  end ADD TASK
 
 // Przy uruchomieniu od razu wyświetl wszystkie
 showAll();
