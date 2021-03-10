@@ -21,14 +21,14 @@
 		<div class="container">
 			<!-- SEARCH -->
 			<section class="search">
-				<input type="text" class="search__input" placeholder="Search task..." />
-				<button class="search__btn-back">
+				<input type="text" id="search" class="search__input" placeholder="Search task..." />
+				<button class="search__btn-back" aria-label="close search input">
 					<i class="fa fa-arrow-left" aria-hidden="true"></i>
 				</button>
-				<button class="search__btn-clear">
+				<button class="search__btn-clear" aria-label="clear search input">
 					<i class="fa fa-times-circle" aria-hidden="true"></i>
 				</button>
-				<button class="search__btn-loupe">
+				<button class="search__btn-loupe" aria-label="search a task">
 					<i class="fa fa-search" aria-hidden="true"></i>
 				</button>
 			</section>
@@ -58,13 +58,19 @@
 					},
 					{
 						"id": 3,
-						"isCompleted": false,
+						"isCompleted": true,
 						"text": "Book flights"
 					},
 					{
 						"id": 4,
 						"isCompleted": false,
-						"text": "Take a dog to the wet. Visit Book Booksss Food flight for Lorem ipsum dolor sit amet, consectetur adipisicing elit. fsdsfsdfsdfsdfsdfsdfsdfdfhaslkdjfhdjhlfkjhadf. Officia laborum id accusantium voluptatibus? Blanditiis quis animi unde quas nulla voluptatibus?"
+						"text": "Take a dog to the wet. Visit Book Booksss Food flight for Lorem ipsum dolor sit amet, consectetur adipisicing . Officia laborum id accusantium voluptatibus? Blanditiis quis animi unde quas nulla voluptatibus?"
+					},
+
+					{
+						"id": 5,
+						"isCompleted": false,
+						"text": "book, dog, flight"
 					}
 				]
 			</script>
@@ -74,7 +80,7 @@
 				<ul id="list-container"></ul>
 			</section>
 			<footer class="footer">
-				<button class="footer__btn-add-task btn-round">
+				<button class="footer__btn-add-task btn-round" aria-label="add new task">
 					<i class="fa fa-plus btn-round__icon" aria-hidden="true"></i>
 				</button>
 			</footer>
@@ -99,4 +105,48 @@
 	</body>
 </html>
 
-<!-- Lorem ipsum dolor sit amet, consectetur adipisicing elit.fsdfhaslkdjfhdlfkjhadflkjhdflkajdhflakdfjhsdlfkjhasdl kdfjhaslfkj hds adskjhf alsdfkjh asdf Pariatur earum hic consequuntur quam ratione consectetur iste eaque iure. Officia laborum id accusantium voluptatibus? Blanditiis quis animi unde quas nulla voluptatibus?Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla repellat impedit itaque id neque sequi ullam praesentium, aliquam soluta molestiae quaerat maiores sed rerum quibusdam debitis dolores modi cumque labore. -->
+<!-- Lorem ipsum dolor sit amet, consectetur adipisicing elit. kdfjhaslfkj hds adskjhf alsdfkjh asdf Pariatur earum hic consequuntur quam ratione consectetur iste eaque iure. Officia laborum id accusantium voluptatibus? Blanditiis quis animi unde quas nulla voluptatibus?Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla repellat impedit itaque id neque sequi ullam praesentium, aliquam soluta molestiae quaerat maiores sed rerum quibusdam debitis dolores modi cumque labore. -->
+
+<!-- <input type="text" id="search" />
+				<button onClick="search(id)" id="button">Highlight</button>
+
+				<p id="text">
+					What exactly is this Worker thread module, and why do we need it? In this post, we will
+					talk about the historical reasons concurrency is implemented in JavaScript and Node.js,
+					the problems we might find, current solutions, and the future of parallel processing with
+					Worker threads. Living in a single-threaded world JavaScript was conceived as a
+					single-threaded programming language that ran in a browser. Being single-threaded means
+					that only one set of instructions is executed at any time in the same process (the
+					browser, in this case, or just the current tab in modern browsers). This made things
+					easier for implementation and for developers using the language. JavaScript was initially
+					a language only useful for adding some interaction to webpages, form validations, and so
+					on — nothing that required the complexity of multithreading.
+				</p> -->
+
+<!-- <input type="search" id="test-search-input" />
+				<button onClick="highlight()" id="test-button">Highlight</button>
+				<p class="test-text" id="text" style="font-size: 14px">
+					Gdzieś daleko prawie w chmurach stoi bardzo wielka góra. Niedostępna jest na krok i tam właśnie siedzi smok. Pewno wielu z was się głowi co on na tej górze robi. Jaka tego jest przyczyna? Opowiadam. Historia się zaczyna. Mieszkał smok pośrodku lasu i przykrą wam prawdę powiem wcale nie dbał on o zdrowie. Szalik, czapka czy kalosze wciąż powtarzał: janie noszę. Lubił spacerować w burzę i w największą wejść kałużę. Tak on zdrowia nie
+					szanował, aż się kiedyś rozchorował – bolą łapy i migdały, zapocony chodzi cały. W
+					skrzydłach rwie go także czasem i ognisty ma on kaszel. Mądra sowa na dąb siada i do smoka
+					tak powiada: twoje smocze przeziębienie to ogromne jest zmartwienie dla mieszkańców lasu
+					tego, strasznie kaszlesz nasz kolego. Wszyscy zgodnie dziś uznali – on swym kaszlem spali
+					las i pozbawi domu nas! By uniknąć losu tego jedna rada jest kolego. Za wzgórzami, tam nad
+					rzeczką, stoi zamek, jest miasteczko. W mieście owym, mój kochany, mieszka lekarz w
+					świecie znany i zna różne on sposoby na pozbycie się choroby. Udaj się więc tam do niego,
+					on wyleczy cię kolego. Smok do miasta ruszył dziarsko po poradę i lekarstwo. Wieść obiegła
+					zamek w lot – do miasteczka przybył smok! Taki stwór odwiedza ludzi, co ciekawość wielką
+					budzi. Śmiało wreszcie ktoś zapytał: skąd się wzięła ta wizyta? Smok szeroko rozwarł
+					paszczę, chciał powiedzieć, zaczął kaszleć. Ogień buchnął dookoła ,tłum uciekał, każdy
+					wołał: on chce zgładzić nas, to pewne i uwięzić nam królewnę. Sznur rycerzy ściągnął wnet
+					wygarbować smoczy grzbiet. Smok ich swoim wzrokiem zmierzył i powiedział do rycerzy –
+					miecze, kopie i pałasze kiepskim lekiem są na kaszel. Zdrowie srodze zaniedbałem i choroby
+					tej doznałem. Nie chcę ja nikogo dręczyć, chcę, by kaszel przestał męczyć. Żadna ze mnie
+					bestia dzika, ja z wizytą do medyka. Posłano więc po doktora, by obejrzał tego stwora.
+					Lekarz zaraz go osłuchał, w paszczę zajrzał i do ucha. Zbadał skrzydła , obie łapy i
+					ogromne smocze chrapy. Puls mu zmierzył i powiedział do rycerzy – żaden miecz, żadna
+					szpada nie uleczą tego gada. Powiem jedno, to rzecz pewna, medycyna tu potrzebna. Zajmę
+					stworem się starannie . Poddam smoka kwarantannie, na odległej wielkiej górze , która stoi
+					prawie w chmurze. Tam też leczył będę stwora, a gdy zdrowia przyjdzie pora, do przyjaciół
+					pomknie w las i każdemu głośno powie: zawsze warto dbać o zdrowie.
+				</p> -->

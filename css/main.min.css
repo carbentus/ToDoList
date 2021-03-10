@@ -15,14 +15,9 @@ body {
 }
 
 button {
-  outline: none;
   border: none;
   background-color: transparent;
   cursor: pointer;
-}
-
-*:focus {
-  outline: none;
 }
 
 .container {
@@ -39,17 +34,16 @@ button {
   -ms-flex-line-pack: start;
       align-content: flex-start;
   margin: 0 auto;
-  padding: 41px 0;
+  padding: 41px 16px 0 16px;
   max-width: 1024px;
   width: 100vw;
-  min-height: 200vh;
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
 .container > * {
   -ms-flex-preferred-size: 100%;
       flex-basis: 100%;
-  margin: 0 16px;
 }
 
 .search {
@@ -186,7 +180,7 @@ button {
 }
 
 .nav-status .nav-status__btn-active {
-  color: white;
+  color: #f8f7f3;
   background-color: #ff7e41;
   border-radius: 34.5px;
 }
@@ -194,19 +188,20 @@ button {
 .task-list {
   -ms-flex-preferred-size: 100%;
       flex-basis: 100%;
+  margin-bottom: 48px;
 }
 
 .task-list .task-list__task {
   background-color: #f8f7f3;
   border-radius: 26px;
   color: #584c48;
-  max-height: 132px;
   margin: 16px 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   padding: 24px;
   max-width: 100%;
+  position: relative;
 }
 
 .task-list .task-list__task .task-list__checkbox {
@@ -216,7 +211,7 @@ button {
 .task-list .task-list__task .task-list__checkbox + label {
   border: 2px solid #3296a0;
   border-radius: 50%;
-  color: white;
+  color: #f8f7f3;
   height: 22px;
   margin: 3px 0;
   line-height: 20px;
@@ -236,11 +231,30 @@ button {
   line-height: 28px;
   margin-left: 24px;
   max-width: 100%;
-  word-break: break-word;
+}
+
+.task-list .task-list__task .task-list__task-description--shorten {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.task-list .task-list__task--long {
+  padding-bottom: 40px;
 }
 
 .task-list .task-list__task-done {
   color: #b6b1ac;
+}
+
+.task-list .task-list__btn-read-more {
+  color: #3296a0;
+  display: block;
+  position: absolute;
+  bottom: 0;
+  right: 24px;
+  padding: 16px 0;
 }
 
 .btn-round {
@@ -251,7 +265,6 @@ button {
   background-color: #23272f;
   border: none;
   border-radius: 50%;
-  color: white;
   font-size: 25px;
 }
 
@@ -332,7 +345,6 @@ button {
   color: #584c48;
   line-height: 24px;
   resize: none;
-  outline: none;
   margin-top: auto;
   background-color: #f8f7f3;
 }
@@ -370,5 +382,9 @@ button {
   left: 150%;
   -webkit-transition: left 0.3s ease-in-out;
   transition: left 0.3s ease-in-out;
+}
+
+mark {
+  background-color: yellow;
 }
 /*# sourceMappingURL=main.min.css.map */

@@ -42,6 +42,19 @@ const initList = () => {
 				return item;
 			});
 		});
+
+		// const allReadMorebtns = document.querySelectorAll('.task-list__btn-read-more');
+		// console.log(allReadMorebtns);
+
+		// const expandContent = (ev) => {
+		// 	console.log(ev.currentTarget);
+		// 	// const taskToExpand = ev.currentTarget.previousElementSibling;
+		// 	// taskToExpand.classList;
+		// 	// console.log(taskToExpand);
+		// };
+		// allReadMorebtns.forEach((btn) => {
+		// 	btn.addEventListener('click', expandContent());
+		// });
 	});
 
 	// Navigation - Switch TABS  (All/Active/Completed)
@@ -77,9 +90,41 @@ const renderList = (items) => {
 			<label for="task_checkbox${item.id}"><i class="fa fa-check" aria-hidden="true"></i></label>
 			<p class="task-list__task-description">${item.text}</p>
 		`;
+
 		listContainer.appendChild(newChild);
+
+		// turncut for long tasks
+		const newChildHeight = newChild.clientHeight;
+
+		if (newChildHeight > 132) {
+			const newChildParagraph = newChild.lastElementChild;
+			newChildParagraph.classList.add('task-list__task-description--shorten');
+
+			const btnReadMore = document.createElement('button');
+			newChild.classList.add('task-list__task--long');
+			newChild.appendChild(btnReadMore);
+			btnReadMore.classList.add('task-list__btn-read-more');
+			btnReadMore.innerText = 'read more...';
+
+			//READ MORE
+			btnReadMore.addEventListener('click', function (ev) {
+				const clickedBtn = ev.currentTarget;
+				const contentToExpand = clickedBtn.previousElementSibling;
+				if (contentToExpand.classList.contains('task-list__task-description--shorten')) {
+					clickedBtn.innerText = 'read less...';
+					contentToExpand.classList.remove('task-list__task-description--shorten');
+				} else {
+					clickedBtn.innerText = 'read more...';
+					contentToExpand.classList.add('task-list__task-description--shorten');
+				}
+			});
+		}
 	});
 };
+
+// start Read more
+
+// end Read more
 
 const filterActive = () => {
 	renderList(tabData.filter((item) => !item.isCompleted));
@@ -106,6 +151,7 @@ const tabAll = document.getElementById('tab-all');
 tabAll.addEventListener('click', showAll);
 
 // --- start SEARCH TASK function
+// const searchInput = document.getElementById('search');
 const filterSearchTask = (ev) => {
 	const searchText = ev.target.value.toLowerCase();
 	if (tabActive.classList.contains('nav-status__btn-active')) {
@@ -119,8 +165,33 @@ const filterSearchTask = (ev) => {
 	} else {
 		renderList(tabData.filter((item) => item.text.toLowerCase().includes(searchText)));
 	}
+
+	let searchedText = searchText.trim();
+	if (searchedText !== '') {
+		console.log(searchedText);
+		let text = document.getElementById('text').innerHTML;
+		let re = new RegExp(searchedText, 'g');
+		let newText = text.replace(re, `<mark>${searchedText}</mark>`);
+		document.getElementById('text').innerHTML = newText;
+	} else {
+		console.log('pusty input');
+	}
 };
 document.querySelector('.search__input').addEventListener('input', filterSearchTask);
+
+//// HIGHLIGHT
+function highlight() {
+	let searchedText = document.getElementById('test-search-input').value.trim();
+	if (searchedText !== '') {
+		console.log('dziala');
+		let text = document.getElementById('text').innerHTML;
+		let re = new RegExp(searchedText, 'g');
+		let newText = text.replace(re, `<mark>${searchedText}</mark>`);
+		document.getElementById('text').innerHTML = newText;
+	} else {
+		console.log('pusty input');
+	}
+}
 
 // clear search input
 const clearSearchInput = () => {
@@ -135,6 +206,7 @@ const clearSearchInput = () => {
 };
 searchClearBtn.addEventListener('click', clearSearchInput);
 
+// expected output: "."
 // --- end SEARCH TASK function
 
 // --- start  ADD TASK - show window
@@ -171,7 +243,6 @@ const addItem = () => {
 	showAll();
 };
 addTaskBtn.addEventListener('click', addItem);
-
 //  end ADD TASK
 
 // Przy uruchomieniu od razu wyświetl wszystkie
