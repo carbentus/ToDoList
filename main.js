@@ -42,19 +42,6 @@ const initList = () => {
 				return item;
 			});
 		});
-
-		// const allReadMorebtns = document.querySelectorAll('.task-list__btn-read-more');
-		// console.log(allReadMorebtns);
-
-		// const expandContent = (ev) => {
-		// 	console.log(ev.currentTarget);
-		// 	// const taskToExpand = ev.currentTarget.previousElementSibling;
-		// 	// taskToExpand.classList;
-		// 	// console.log(taskToExpand);
-		// };
-		// allReadMorebtns.forEach((btn) => {
-		// 	btn.addEventListener('click', expandContent());
-		// });
 	});
 
 	// Navigation - Switch TABS  (All/Active/Completed)
@@ -106,8 +93,8 @@ const renderList = (items) => {
 			btnReadMore.classList.add('task-list__btn-read-more');
 			btnReadMore.innerText = 'read more...';
 
-			//READ MORE
-			btnReadMore.addEventListener('click', function (ev) {
+			//READ MORE / READ LESS
+			const resizeTaskContent = function (ev) {
 				const clickedBtn = ev.currentTarget;
 				const contentToExpand = clickedBtn.previousElementSibling;
 				if (contentToExpand.classList.contains('task-list__task-description--shorten')) {
@@ -117,7 +104,9 @@ const renderList = (items) => {
 					clickedBtn.innerText = 'read more...';
 					contentToExpand.classList.add('task-list__task-description--shorten');
 				}
-			});
+			};
+
+			btnReadMore.addEventListener('click', resizeTaskContent);
 		}
 	});
 };
@@ -206,7 +195,6 @@ const clearSearchInput = () => {
 };
 searchClearBtn.addEventListener('click', clearSearchInput);
 
-// expected output: "."
 // --- end SEARCH TASK function
 
 // --- start  ADD TASK - show window
@@ -247,3 +235,15 @@ addTaskBtn.addEventListener('click', addItem);
 
 // Przy uruchomieniu od razu wyświetl wszystkie
 showAll();
+
+// Handle READ MORE on resize
+const readMoreOnResize = () => {
+	if (tabActive.classList.contains('nav-status__btn-active')) {
+		filterActive();
+	} else if (tabCompleted.classList.contains('nav-status__btn-active')) {
+		filterCompleted();
+	} else {
+		showAll();
+	}
+};
+window.addEventListener('resize', readMoreOnResize);
