@@ -1,3 +1,6 @@
+const MAX_TAB_HEIGHT = 132; // 3x line height, wrap overflowing text 
+
+const textToSearch = document.getElementById('text').innerText;
 let tabData = JSON.parse(document.querySelector('#data-source').innerHTML);
 
 const loupe = document.querySelector('.search__btn-loupe');
@@ -61,7 +64,25 @@ const initList = () => {
 	});
 };
 
-const renderList = (items) => {
+const addHighlight = (text, searchText) => {
+	let re = new RegExp(`(${searchText})`, 'ig');
+	return text.replace(re, `<mark>$1</mark>`);
+}
+
+//READ MORE / READ LESS
+const resizeTaskContent = function (ev) {
+	const clickedBtn = ev.currentTarget;
+	const contentToExpand = clickedBtn.previousElementSibling;
+	if (contentToExpand.classList.contains('task-list__task-description--shorten')) {
+		clickedBtn.innerText = 'read less...';
+		contentToExpand.classList.remove('task-list__task-description--shorten');
+	} else {
+		clickedBtn.innerText = 'read more...';
+		contentToExpand.classList.add('task-list__task-description--shorten');
+	}
+};
+
+const renderList = (items, searchText = '') => {
 	const listContainer = document.querySelector('#list-container');
 	listContainer.innerHTML = '';
 	items.forEach((item) => {
@@ -70,12 +91,21 @@ const renderList = (items) => {
 		if (item.isCompleted) {
 			newChild.classList.add('task-list__task-done');
 		}
+		newChild.setAttribute('draggable', true);
+
+		let itemText = item.text;
+		if (searchText) {
+			itemText = addHighlight(itemText, searchText);
+		}
+
+		console.log(itemText);
+
 		newChild.innerHTML = `
 			<input type="checkbox" class="task-list__checkbox" id="task_checkbox${item.id}"${
 			item.isCompleted ? ' checked' : ''
 		} data-id="${item.id}"/>
 			<label for="task_checkbox${item.id}"><i class="fa fa-check" aria-hidden="true"></i></label>
-			<p class="task-list__task-description">${item.text}</p>
+			<p class="task-list__task-description">${itemText}</p>
 		`;
 
 		listContainer.appendChild(newChild);
@@ -83,7 +113,7 @@ const renderList = (items) => {
 		// turncut for long tasks
 		const newChildHeight = newChild.clientHeight;
 
-		if (newChildHeight > 132) {
+		if (newChildHeight > MAX_TAB_HEIGHT) {
 			const newChildParagraph = newChild.lastElementChild;
 			newChildParagraph.classList.add('task-list__task-description--shorten');
 
@@ -92,19 +122,6 @@ const renderList = (items) => {
 			newChild.appendChild(btnReadMore);
 			btnReadMore.classList.add('task-list__btn-read-more');
 			btnReadMore.innerText = 'read more...';
-
-			//READ MORE / READ LESS
-			const resizeTaskContent = function (ev) {
-				const clickedBtn = ev.currentTarget;
-				const contentToExpand = clickedBtn.previousElementSibling;
-				if (contentToExpand.classList.contains('task-list__task-description--shorten')) {
-					clickedBtn.innerText = 'read less...';
-					contentToExpand.classList.remove('task-list__task-description--shorten');
-				} else {
-					clickedBtn.innerText = 'read more...';
-					contentToExpand.classList.add('task-list__task-description--shorten');
-				}
-			};
 
 			btnReadMore.addEventListener('click', resizeTaskContent);
 		}
@@ -139,35 +156,43 @@ tabCompleted.addEventListener('click', filterCompleted);
 const tabAll = document.getElementById('tab-all');
 tabAll.addEventListener('click', showAll);
 
+const highlight = (searchText) => {
+	let searchedText = searchText.trim();
+	if (searchedText !== '') {
+		// console.log(searchedText);
+		const newText = addHighlight(textToSearch, searchedText)
+		document.getElementById('text').innerHTML = newText;
+	} else {
+		console.log('pusty input');
+	}
+}
+
 // --- start SEARCH TASK function
 // const searchInput = document.getElementById('search');
 const filterSearchTask = (ev) => {
 	const searchText = ev.target.value.toLowerCase();
 	if (tabActive.classList.contains('nav-status__btn-active')) {
 		renderList(
-			tabData.filter((item) => item.text.toLowerCase().includes(searchText) && !item.isCompleted)
+			tabData.filter((item) => item.text.toLowerCase().includes(searchText) && !item.isCompleted),
+			searchText,
 		);
 	} else if (tabCompleted.classList.contains('nav-status__btn-active')) {
 		renderList(
-			tabData.filter((item) => item.text.toLowerCase().includes(searchText) && item.isCompleted)
+			tabData.filter((item) => item.text.toLowerCase().includes(searchText) && item.isCompleted),
+			searchText,
 		);
 	} else {
-		renderList(tabData.filter((item) => item.text.toLowerCase().includes(searchText)));
+		renderList(
+			tabData.filter((item) => item.text.toLowerCase().includes(searchText)),
+			searchText,
+		);
 	}
 
-	let searchedText = searchText.trim();
-	if (searchedText !== '') {
-		console.log(searchedText);
-		let text = document.getElementById('text').innerHTML;
-		let re = new RegExp(searchedText, 'g');
-		let newText = text.replace(re, `<mark>${searchedText}</mark>`);
-		document.getElementById('text').innerHTML = newText;
-	} else {
-		console.log('pusty input');
-	}
+	highlight(searchText);
 };
 document.querySelector('.search__input').addEventListener('input', filterSearchTask);
 
+<<<<<<< HEAD
 //// HIGHLIGHT
 // const text = document.querySelector('.text').innerText;
 // function highlight() {
@@ -183,6 +208,8 @@ document.querySelector('.search__input').addEventListener('input', filterSearchT
 // 	}
 }
 
+=======
+>>>>>>> 8529d27f68622dc7894aedaf1b90424898cd5ce2
 // clear search input
 const clearSearchInput = () => {
 	searchInput.value = '';
