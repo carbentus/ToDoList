@@ -169,17 +169,18 @@ const filterSearchTask = (ev) => {
 document.querySelector('.search__input').addEventListener('input', filterSearchTask);
 
 //// HIGHLIGHT
-function highlight() {
-	let searchedText = document.getElementById('test-search-input').value.trim();
-	if (searchedText !== '') {
-		console.log('dziala');
-		let text = document.getElementById('text').innerHTML;
-		let re = new RegExp(searchedText, 'g');
-		let newText = text.replace(re, `<mark>${searchedText}</mark>`);
-		document.getElementById('text').innerHTML = newText;
-	} else {
-		console.log('pusty input');
-	}
+// const text = document.querySelector('.text').innerText;
+// function highlight() {
+// 	let searchedText = document.getElementById('test-search-input').value.trim();
+// 	if (searchedText !== '') {
+// 		console.log('dziala');
+// 		// let text = document.getElementById('text').innerHTML;
+// 		let re = new RegExp(searchedText, 'g');
+// 		let newText = text.replace(re, `<mark>${searchedText}</mark>`);
+// 		document.getElementById('text').innerHTML = newText;
+// 	} else {
+// 		console.log('pusty input');
+// 	}
 }
 
 // clear search input
