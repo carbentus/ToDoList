@@ -36,7 +36,7 @@ button {
   margin: 0 auto;
   padding: 41px 16px 0 16px;
   max-width: 1024px;
-  width: 100vw;
+  width: 100%;
   overflow-x: hidden;
   min-height: 100vh;
 }
@@ -46,12 +46,12 @@ button {
       flex-basis: 100%;
 }
 
-.search {
+.container .search {
   position: relative;
   height: 48px;
 }
 
-.search .search__input {
+.container .search .search__input {
   position: absolute;
   top: 0;
   right: 0;
@@ -68,23 +68,23 @@ button {
   background-color: #f8f7f3;
 }
 
-.search .search__input-active {
+.container .search .search__input-active {
   display: block;
   width: 100%;
   padding: 16px 48px;
 }
 
-.search .search__input-active:focus {
+.container .search .search__input-active:focus {
   border: 1px solid #fdc32c;
 }
 
-.search .search__btn-back,
-.search .search__btn-clear {
+.container .search .search__btn-back,
+.container .search .search__btn-clear {
   visibility: hidden;
 }
 
-.search .search__btn-back-active,
-.search .search__btn-clear-active {
+.container .search .search__btn-back-active,
+.container .search .search__btn-clear-active {
   position: absolute;
   visibility: visible;
   text-align: center;
@@ -93,19 +93,19 @@ button {
   width: 48px;
 }
 
-.search .search__btn-back-active {
+.container .search .search__btn-back-active {
   top: 0;
   left: 0;
   color: #584c48;
 }
 
-.search .search__btn-clear-active {
+.container .search .search__btn-clear-active {
   top: 0;
   right: 0;
   color: #b6b1ac;
 }
 
-.search .search__btn-loupe {
+.container .search .search__btn-loupe {
   display: block;
   color: #f8f7f3;
   background-color: #fdc32c;
@@ -126,30 +126,30 @@ button {
   transition: width 0.1s;
 }
 
-.search .search__btn-loupe-inactive {
+.container .search .search__btn-loupe-inactive {
   width: 0;
   visibility: hidden;
 }
 
-.search .search__btn-loupe-inactive > i {
+.container .search .search__btn-loupe-inactive > i {
   display: none;
 }
 
-.header {
+.container .header {
   text-align: center;
   margin: 24px 0 36px 0;
 }
 
-.header .header__hello {
+.container .header .header__hello {
   font-size: 2.8rem;
 }
 
-.header__p {
+.container .header__p {
   font-weight: 600;
   font-size: 1.4rem;
 }
 
-.nav-status {
+.container .nav-status {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -166,7 +166,7 @@ button {
   padding: 8px;
 }
 
-.nav-status .nav-status__btn {
+.container .nav-status .nav-status__btn {
   border-radius: 34.5px;
   color: #3a3a40;
   -ms-flex-preferred-size: 33%;
@@ -179,19 +179,19 @@ button {
   color: #3a3a40;
 }
 
-.nav-status .nav-status__btn-active {
+.container .nav-status .nav-status__btn-active {
   color: #f8f7f3;
   background-color: #ff7e41;
   border-radius: 34.5px;
 }
 
-.task-list {
+.container .task-list {
   -ms-flex-preferred-size: 100%;
       flex-basis: 100%;
   margin-bottom: 48px;
 }
 
-.task-list .task-list__task {
+.container .task-list .task-list__task {
   background-color: #f8f7f3;
   border-radius: 26px;
   color: #584c48;
@@ -204,11 +204,11 @@ button {
   position: relative;
 }
 
-.task-list .task-list__task .task-list__checkbox {
+.container .task-list .task-list__task .task-list__checkbox {
   opacity: 0;
 }
 
-.task-list .task-list__task .task-list__checkbox + label {
+.container .task-list .task-list__task .task-list__checkbox + label {
   border: 2px solid #3296a0;
   border-radius: 50%;
   color: #f8f7f3;
@@ -221,34 +221,34 @@ button {
   width: 22px;
 }
 
-.task-list .task-list__task .task-list__checkbox:checked + label {
+.container .task-list .task-list__task .task-list__checkbox:checked + label {
   background-color: #3296a0;
   font-size: 12px;
 }
 
-.task-list .task-list__task .task-list__task-description {
+.container .task-list .task-list__task .task-list__task-description {
   font-size: 1.4rem;
   line-height: 28px;
   margin-left: 24px;
   max-width: 100%;
 }
 
-.task-list .task-list__task .task-list__task-description--shorten {
+.container .task-list .task-list__task .task-list__task-description--shorten {
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-.task-list .task-list__task--long {
+.container .task-list .task-list__task--long {
   padding-bottom: 40px;
 }
 
-.task-list .task-list__task-done {
+.container .task-list .task-list__task-done {
   color: #b6b1ac;
 }
 
-.task-list .task-list__btn-read-more {
+.container .task-list .task-list__btn-read-more {
   color: #3296a0;
   display: block;
   position: absolute;
@@ -257,7 +257,7 @@ button {
   padding: 16px 0;
 }
 
-.btn-round {
+.container .btn-round {
   -webkit-filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
           filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   width: 52px;
@@ -268,19 +268,19 @@ button {
   font-size: 25px;
 }
 
-.btn-round .btn-round__icon {
+.container .btn-round .btn-round__icon {
   line-height: 52px;
   color: #f8f7f3;
 }
 
-.footer {
+.container .footer {
   margin: 0;
   position: fixed;
   bottom: 0;
   right: 0;
 }
 
-.footer .footer__btn-add-task {
+.container .footer .footer__btn-add-task {
   position: absolute;
   right: 0;
   bottom: 0;
@@ -288,7 +288,7 @@ button {
   line-height: 55px;
 }
 
-.new-task-container {
+.container .new-task-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -309,31 +309,31 @@ button {
   transition: left 0.3s ease-in-out;
 }
 
-.new-task-container .new-task-container__btn-back-to-list {
+.container .new-task-container .new-task-container__btn-back-to-list {
   -ms-flex-preferred-size: auto;
       flex-basis: auto;
   padding-right: 15%;
   height: 36px;
 }
 
-.new-task-container .new-task-container__btn-back-to-list > * {
+.container .new-task-container .new-task-container__btn-back-to-list > * {
   float: left;
   line-height: 24px;
 }
 
-.new-task-container .new-task-container__btn-back-to-list > p {
+.container .new-task-container .new-task-container__btn-back-to-list > p {
   margin-left: 16px;
   font-family: 'Nunito', sans-serif;
   font-weight: 800;
 }
 
-.new-task-container .new-task-container__title {
+.container .new-task-container .new-task-container__title {
   -ms-flex-preferred-size: 100%;
       flex-basis: 100%;
   margin: 24px 0;
 }
 
-.new-task-container .new-task-container__textarea {
+.container .new-task-container .new-task-container__textarea {
   width: 100%;
   height: 270px;
   padding: 16px 24px;
@@ -349,7 +349,7 @@ button {
   background-color: #f8f7f3;
 }
 
-.new-task-container .new-task-container__bcg-for-btn {
+.container .new-task-container .new-task-container__bcg-for-btn {
   height: 56px;
   width: 100%;
   background-color: #f8f7f3;
@@ -360,7 +360,7 @@ button {
   border-top-right-radius: 20px;
 }
 
-.new-task-container .new-task-container__bcg-for-btn .new-task-container__btn-confirm {
+.container .new-task-container .new-task-container__bcg-for-btn .new-task-container__btn-confirm {
   position: absolute;
   bottom: 50%;
   left: 50%;
@@ -378,14 +378,14 @@ button {
   color: #f8f7f3;
 }
 
-.new-task-container-hide {
+.container .new-task-container-hide {
   left: 150%;
   -webkit-transition: left 0.3s ease-in-out;
   transition: left 0.3s ease-in-out;
 }
 
 mark {
-  background-color: yellow;
+  background-color: #fdc32c;
 }
 
 #text {

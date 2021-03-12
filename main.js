@@ -1,19 +1,19 @@
-const MAX_TAB_HEIGHT = 132; // 3x line height, wrap overflowing text 
-
-const textToSearch = document.getElementById('text').innerText;
+const MAX_TAB_HEIGHT = 132; // 3x line height, wrap overflowing text
 let tabData = JSON.parse(document.querySelector('#data-source').innerHTML);
 
 const loupe = document.querySelector('.search__btn-loupe');
 const searchInput = document.querySelector('.search__input');
 const searchBackBtn = document.querySelector('.search__btn-back');
 const searchClearBtn = document.querySelector('.search__btn-clear');
+
 const initList = () => {
-	// Toggle SEARCH input
+	// SEARCH INPUT
 	const showSearchInput = () => {
 		searchInput.classList.add('search__input-active');
 		loupe.classList.add('search__btn-loupe-inactive');
 		searchBackBtn.classList.add('search__btn-back-active');
 		searchClearBtn.classList.add('search__btn-clear-active');
+		searchInput.focus();
 	};
 
 	const closeSearchInput = () => {
@@ -21,30 +21,35 @@ const initList = () => {
 		loupe.classList.remove('search__btn-loupe-inactive');
 		searchBackBtn.classList.remove('search__btn-back-active');
 		searchClearBtn.classList.remove('search__btn-clear-active');
+		clearSearchInput();
 	};
+
 	searchBackBtn.addEventListener('click', closeSearchInput);
 	loupe.addEventListener('click', showSearchInput);
-	// clear search input
 
 	// CLOSE THE TASK
-	const allCheckBox = document.querySelectorAll('input.task-list__checkbox');
-
-	allCheckBox.forEach((checkBox) => {
-		checkBox.addEventListener('click', (ev) => {
-			const currentItem = ev.currentTarget;
-			currentItem.parentNode.classList.toggle('task-list__task-done');
-			const currentItemId = currentItem.getAttribute('data-id');
-
-			tabData = tabData.map((item) => {
-				if (item.id.toString() === currentItemId) {
-					return {
-						...item,
-						isCompleted: currentItem.checked,
-					};
-				}
-				return item;
-			});
+	const renderClosedTasks = (currentItem, currentItemId) => {
+		tabData = tabData.map((item) => {
+			if (item.id.toString() === currentItemId) {
+				return {
+					...item,
+					isCompleted: currentItem.checked,
+				};
+			}
+			return item;
 		});
+	};
+	// CLOSE THE TASK
+	const closeTheTask = (ev) => {
+		const currentItem = ev.currentTarget;
+		currentItem.parentNode.classList.toggle('task-list__task-done');
+		const currentItemId = currentItem.getAttribute('data-id');
+		renderClosedTasks(currentItem, currentItemId);
+	};
+
+	const allCheckBox = document.querySelectorAll('input.task-list__checkbox');
+	allCheckBox.forEach((checkBox) => {
+		checkBox.addEventListener('click', closeTheTask);
 	});
 
 	// Navigation - Switch TABS  (All/Active/Completed)
@@ -64,10 +69,11 @@ const initList = () => {
 	});
 };
 
+// Highlight searched text
 const addHighlight = (text, searchText) => {
 	let re = new RegExp(`(${searchText})`, 'ig');
 	return text.replace(re, `<mark>$1</mark>`);
-}
+};
 
 //READ MORE / READ LESS
 const resizeTaskContent = function (ev) {
@@ -82,9 +88,25 @@ const resizeTaskContent = function (ev) {
 	}
 };
 
+const shortenLongTask = (task) => {
+	const itemHeight = task.clientHeight;
+
+	if (itemHeight > MAX_TAB_HEIGHT) {
+		const taskParagraph = task.lastElementChild;
+		taskParagraph.classList.add('task-list__task-description--shorten');
+		const btnReadMore = document.createElement('button');
+		task.classList.add('task-list__task--long');
+		task.appendChild(btnReadMore);
+		btnReadMore.classList.add('task-list__btn-read-more');
+		btnReadMore.innerText = 'read more...';
+		btnReadMore.addEventListener('click', resizeTaskContent);
+	}
+};
+
 const renderList = (items, searchText = '') => {
 	const listContainer = document.querySelector('#list-container');
 	listContainer.innerHTML = '';
+	//
 	items.forEach((item) => {
 		const newChild = document.createElement('li');
 		newChild.classList.add('task-list__task');
@@ -98,8 +120,7 @@ const renderList = (items, searchText = '') => {
 			itemText = addHighlight(itemText, searchText);
 		}
 
-		console.log(itemText);
-
+		// console.log(itemText);
 		newChild.innerHTML = `
 			<input type="checkbox" class="task-list__checkbox" id="task_checkbox${item.id}"${
 			item.isCompleted ? ' checked' : ''
@@ -109,28 +130,9 @@ const renderList = (items, searchText = '') => {
 		`;
 
 		listContainer.appendChild(newChild);
-
-		// turncut for long tasks
-		const newChildHeight = newChild.clientHeight;
-
-		if (newChildHeight > MAX_TAB_HEIGHT) {
-			const newChildParagraph = newChild.lastElementChild;
-			newChildParagraph.classList.add('task-list__task-description--shorten');
-
-			const btnReadMore = document.createElement('button');
-			newChild.classList.add('task-list__task--long');
-			newChild.appendChild(btnReadMore);
-			btnReadMore.classList.add('task-list__btn-read-more');
-			btnReadMore.innerText = 'read more...';
-
-			btnReadMore.addEventListener('click', resizeTaskContent);
-		}
+		shortenLongTask(newChild);
 	});
 };
-
-// start Read more
-
-// end Read more
 
 const filterActive = () => {
 	renderList(tabData.filter((item) => !item.isCompleted));
@@ -156,17 +158,6 @@ tabCompleted.addEventListener('click', filterCompleted);
 const tabAll = document.getElementById('tab-all');
 tabAll.addEventListener('click', showAll);
 
-const highlight = (searchText) => {
-	let searchedText = searchText.trim();
-	if (searchedText !== '') {
-		// console.log(searchedText);
-		const newText = addHighlight(textToSearch, searchedText)
-		document.getElementById('text').innerHTML = newText;
-	} else {
-		console.log('pusty input');
-	}
-}
-
 // --- start SEARCH TASK function
 // const searchInput = document.getElementById('search');
 const filterSearchTask = (ev) => {
@@ -174,45 +165,23 @@ const filterSearchTask = (ev) => {
 	if (tabActive.classList.contains('nav-status__btn-active')) {
 		renderList(
 			tabData.filter((item) => item.text.toLowerCase().includes(searchText) && !item.isCompleted),
-			searchText,
+			searchText
 		);
 	} else if (tabCompleted.classList.contains('nav-status__btn-active')) {
 		renderList(
 			tabData.filter((item) => item.text.toLowerCase().includes(searchText) && item.isCompleted),
-			searchText,
+			searchText
 		);
 	} else {
 		renderList(
 			tabData.filter((item) => item.text.toLowerCase().includes(searchText)),
-			searchText,
+			searchText
 		);
 	}
-
-	highlight(searchText);
 };
 document.querySelector('.search__input').addEventListener('input', filterSearchTask);
 
-<<<<<<< HEAD
-//// HIGHLIGHT
-// const text = document.querySelector('.text').innerText;
-// function highlight() {
-// 	let searchedText = document.getElementById('test-search-input').value.trim();
-// 	if (searchedText !== '') {
-// 		console.log('dziala');
-// 		// let text = document.getElementById('text').innerHTML;
-// 		let re = new RegExp(searchedText, 'g');
-// 		let newText = text.replace(re, `<mark>${searchedText}</mark>`);
-// 		document.getElementById('text').innerHTML = newText;
-// 	} else {
-// 		console.log('pusty input');
-// 	}
-}
-
-=======
->>>>>>> 8529d27f68622dc7894aedaf1b90424898cd5ce2
-// clear search input
-const clearSearchInput = () => {
-	searchInput.value = '';
+const filterTasksAccStatus = () => {
 	if (tabActive.classList.contains('nav-status__btn-active')) {
 		filterActive();
 	} else if (tabCompleted.classList.contains('nav-status__btn-active')) {
@@ -220,6 +189,12 @@ const clearSearchInput = () => {
 	} else {
 		showAll();
 	}
+};
+
+// clear search input
+const clearSearchInput = () => {
+	searchInput.value = '';
+	filterTasksAccStatus();
 };
 searchClearBtn.addEventListener('click', clearSearchInput);
 
@@ -261,17 +236,8 @@ const addItem = () => {
 addTaskBtn.addEventListener('click', addItem);
 //  end ADD TASK
 
-// Przy uruchomieniu od razu wyświetl wszystkie
+// On start
 showAll();
 
 // Handle READ MORE on resize
-const readMoreOnResize = () => {
-	if (tabActive.classList.contains('nav-status__btn-active')) {
-		filterActive();
-	} else if (tabCompleted.classList.contains('nav-status__btn-active')) {
-		filterCompleted();
-	} else {
-		showAll();
-	}
-};
-window.addEventListener('resize', readMoreOnResize);
+window.addEventListener('resize', filterTasksAccStatus);
