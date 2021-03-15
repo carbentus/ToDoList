@@ -20,6 +20,10 @@ button {
   cursor: pointer;
 }
 
+body.has-mouse *:focus {
+  outline: none;
+}
+
 .container {
   background-color: #c9e0db;
   position: relative;
@@ -252,9 +256,9 @@ button {
   color: #3296a0;
   display: block;
   position: absolute;
-  bottom: 0;
-  right: 24px;
-  padding: 16px 0;
+  bottom: -4px;
+  right: 0;
+  padding: 20px 24px;
 }
 
 .container .btn-round {

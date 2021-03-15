@@ -21,9 +21,9 @@ button {
 	cursor: pointer;
 }
 
-// *:focus {
-// 	outline: none;
-// }
+body.has-mouse *:focus {
+	outline: none;
+}
 
 .container {
 	background-color: $app-bocground-color;
@@ -190,6 +190,7 @@ button {
 			margin: 16px 0;
 			display: flex;
 			padding: 24px;
+			// padding-bottom: 32px;
 			max-width: 100%;
 			position: relative;
 
@@ -240,9 +241,9 @@ button {
 			color: #3296a0;
 			display: block;
 			position: absolute;
-			bottom: 0;
-			right: 24px;
-			padding: 16px 0;
+			bottom: -4px;
+			right: 0;
+			padding: 20px 24px;
 		}
 	}
 
