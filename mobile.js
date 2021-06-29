@@ -1,7 +1,7 @@
 const ul = document.querySelector('ul');
 
 const onTouch = (e) => {
-  console.log('ruszylo');
+  console.log('on Touch ruszylo');
   console.log(e.currentTarget);
   console.log(allTasks);
 };

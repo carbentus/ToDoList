@@ -195,17 +195,66 @@ body.has-mouse *:focus {
   margin-bottom: 48px;
 }
 
+.container .task-list .task-list__task.selected {
+  background-color: palegoldenrod;
+}
+
 .container .task-list .task-list__task {
-  background-color: #f8f7f3;
-  border-radius: 26px;
   color: #584c48;
   margin: 16px 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  padding: 24px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   max-width: 100%;
   position: relative;
+}
+
+.container .task-list .task-list__task .task-list__task-container {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  padding: 24px;
+  background-color: #f8f7f3;
+  border-radius: 26px;
+}
+
+.container .task-list .task-list__task .task-list__task-edit-delete {
+  display: none;
+}
+
+.container .task-list .task-list__task .task-list__task-edit-delete.active {
+  background-color: #c9e0db;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: auto;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container .task-list .task-list__task .task-list__task-edit-delete.active > i {
+  color: #23272f;
+  font-size: 3rem;
+  padding: 20px;
+}
+
+.container .task-list .task-list__task .task-list__task-edit-delete.active > i:nth-child(1) {
+  padding-right: 10px;
+}
+
+.container .task-list .task-list__task .task-list__task-edit-delete.active > i:nth-child(2) {
+  padding-left: 10px;
 }
 
 .container .task-list .task-list__task .task-list__checkbox {
@@ -278,10 +327,13 @@ body.has-mouse *:focus {
 }
 
 .container .footer {
-  margin: 0;
   position: fixed;
+  max-width: 1024px;
   bottom: 0;
-  right: 0;
+  left: 0%;
+  right: 0%;
+  background-color: yellow;
+  margin: 0 auto;
 }
 
 .container .footer .footer__btn-add-task {
@@ -302,12 +354,13 @@ body.has-mouse *:focus {
       flex-wrap: wrap;
   background-color: #c9e0db;
   width: 100%;
+  max-width: 1024px;
   height: 100%;
   max-height: 100%;
   top: 0;
-  left: 0;
+  left: auto;
   position: fixed;
-  margin: 0;
+  margin: 0 auto;
   padding: 40px 24px 0 24px;
   -webkit-transition: left 0.3s ease-in-out;
   transition: left 0.3s ease-in-out;
