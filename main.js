@@ -120,7 +120,10 @@ const renderList = (items, searchText = '') => {
 
     const newChildEditDelete = document.createElement('div');
     newChildEditDelete.classList.add('task-list__task-edit-delete');
-    newChildEditDelete.innerHTML = `<i class="fa fa-pencil" aria-hidden="true"></i><i class="fa fa-trash-o" aria-hidden="true"></i>`;
+    newChildEditDelete.innerHTML = `
+    <button class="task-list__btn-edit-delete"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+    <button class="task-list__btn-edit-delete">
+    <i class="fa fa-trash-o" aria-hidden="true"></i></button>`;
     console.log(newChildEditDelete);
 
     if (item.isCompleted) {
@@ -139,12 +142,14 @@ const renderList = (items, searchText = '') => {
     let touchendX = 0;
     function handleGestureX() {
       if (touchendX - touchstartX > 100) {
-        alert('swiped right!');
-        newChildEditDelete.classList.remove('active');
+        console.log('swiped right!');
+        newChildEditDelete.classList.remove('active-swipe');
+        newChildTextContent.classList.remove('active-swipe');
       }
       if (touchendX - touchstartX < -100) {
-        alert('swiped left!');
-        newChildEditDelete.classList.add('active');
+        console.log('swiped left!');
+        newChildEditDelete.classList.add('active-swipe');
+        newChildTextContent.classList.add('active-swipe');
       }
     }
 
@@ -165,7 +170,7 @@ const renderList = (items, searchText = '') => {
 
     // console.log(itemText);
     newChild.innerHTML = `
-    <div class="task-list__task-container">
+    <div class="task-list__text-container">
 			<input type="checkbox" class="task-list__checkbox" id="task_checkbox${
         item.id
       }"${item.isCompleted ? ' checked' : ''} data-id="${item.id}"/>
