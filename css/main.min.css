@@ -202,23 +202,19 @@ body.has-mouse *:focus {
 .container .task-list .task-list__task {
   color: #584c48;
   margin: 16px 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  list-style: none;
   max-width: 100%;
   position: relative;
 }
 
 .container .task-list .task-list__task .task-list__text-container {
   position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-preferred-size: 100%;
-      flex-basis: 100%;
   padding: 24px;
   background-color: #f8f7f3;
   border-radius: 26px;
@@ -229,40 +225,44 @@ body.has-mouse *:focus {
 }
 
 .container .task-list .task-list__task .task-list__text-container.active-swipe {
-  -webkit-transform: translateX(-20%);
-          transform: translateX(-20%);
+  -webkit-transform: translateX(-40%);
+          transform: translateX(-40%);
   width: 100%;
 }
 
 .container .task-list .task-list__task .task-list__task-edit-delete {
   display: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin-left: auto;
 }
 
-.container .task-list .task-list__task .task-list__task-edit-delete.active-swipe {
-  background-color: #c9e0db;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+.container .task-list .task-list__task .task-list__task-edit-delete > button {
+  font-size: 25px;
+  padding: 15px;
 }
 
-.container .task-list .task-list__task .task-list__task-edit-delete.active-swipe > button {
-  color: #23272f;
-  font-size: 3rem;
-  padding: 20px;
-}
-
-.container .task-list .task-list__task .task-list__task-edit-delete.active-swipe > button:nth-child(1) {
+.container .task-list .task-list__task .task-list__task-edit-delete > button:nth-child(1) {
   padding-right: 10px;
 }
 
-.container .task-list .task-list__task .task-list__task-edit-delete.active-swipe > button:nth-child(2) {
+.container .task-list .task-list__task .task-list__task-edit-delete > button:nth-child(2) {
   padding-left: 10px;
+}
+
+.container .task-list .task-list__task .task-list__task-edit-delete i {
+  color: #23272f;
+}
+
+.container .task-list .task-list__task .task-list__task-edit-delete.active-swipe {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
 }
 
 .container .task-list .task-list__task .task-list__checkbox {
