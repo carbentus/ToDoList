@@ -301,6 +301,10 @@ const addItem = () => {
 addTaskBtn.addEventListener('click', addItem);
 //  end ADD TASK
 
+// START - Delete  selected Task on swipe
+
+// END - Delete selected Task on swipe
+
 // On start
 showAll();
 
