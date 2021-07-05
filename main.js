@@ -68,6 +68,10 @@ const initList = () => {
   });
 
   // ----- DELETE TASK on Swipe - START
+  const allTrashBin = document.querySelectorAll(
+    'button.task-list__btn-edit-delete.trash'
+  );
+
   const renderTaskAfterDelete = (currentItemId) => {
     tabData.splice(currentItemId, 1);
     for (let i = 0; i < tabData.length; i++) {
@@ -86,16 +90,20 @@ const initList = () => {
     console.log(tabData);
   };
 
-  const allTrashBin = document.querySelectorAll(
-    'button.task-list__btn-edit-delete.trash'
-  );
   allTrashBin.forEach((trashBin) => {
     trashBin.addEventListener('click', deleteTask);
   });
   // ----- DELETE TASK on Swipe - END
 
   // ----- EDIT TASK on Swipe - START
-
+  const allPencil = document.querySelectorAll(
+    'button.task-list__btn-edit-delete.pencil'
+  );
+  const editTaskWindow = document.querySelector('.edit-task-container');
+  const backToListBtn = document.querySelector(
+    '.edit-task-container__btn-back-to-list'
+  );
+  const saveTaskBtn = document.querySelector('.edit-task-container__btn-save');
   // const renderTaskAfterDelete = (currentItemId) => {
   //   tabData.splice(currentItemId, 1);
   //   for (let i = 0; i < tabData.length; i++) {
@@ -105,30 +113,65 @@ const initList = () => {
   //   return tabData;
   // };
 
-  const editTask = (ev) => {
-    console.log('edit');
-    const currentItem = ev.currentTarget;
-    const currentItemId = currentItem.parentNode.getAttribute('data-id') - 1;
-    console.log('To edit item nr:' + tabData[currentItemId].text);
-    const taskTextBeforeChange = tabData[currentItemId].text;
-    openNewEditTask();
-    newTaskTextInput.value = taskTextBeforeChange;
-    addTaskBtn.innerHTML = 'Save';
+  const getTaskId = (ev) => {
+    const currentTask = ev.currentTarget;
+    const taskId = currentTask.parentNode.getAttribute('data-id') - 1;
+    // console.log('To edit item nr:' + tabData[currentItemId].text);
+    return taskId;
   };
 
-  const saveTask = () => {
-    const taskTextAfterChange = newTaskTextInput.value;
-    console.log(taskTextAfterChange);
+  const openEditTaskWindow = () => {
+    editTaskWindow.classList.remove('edit-task-container-hide');
+    document.body.style.overflow = 'hidden';
   };
 
-  const allPencil = document.querySelectorAll(
-    'button.task-list__btn-edit-delete.pencil'
-  );
-  allPencil.forEach((Pencil) => {
-    Pencil.addEventListener('click', editTask);
+  const closeEditTaskWindow = () => {
+    editTaskWindow.classList.add('edit-task-container-hide');
+    document.body.style.overflow = 'visible';
+  };
+
+  backToListBtn.addEventListener('click', closeEditTaskWindow);
+
+  const showEditedTask = (taskId) => {
+    const editTaskTextInput = document.querySelector(
+      '.edit-task-container__textarea'
+    );
+    openEditTaskWindow();
+    const taskTextBeforeChange = tabData[taskId].text;
+    // console.log(taskTextBeforeChange);
+    editTaskTextInput.value = taskTextBeforeChange;
+  };
+
+  const handlePencilClick = (ev) => {
+    const id = getTaskId(ev);
+    console.log('handle edit pencil: ' + id);
+    showEditedTask(id);
+  };
+
+  allPencil.forEach((pencil) => {
+    pencil.addEventListener('click', handlePencilClick);
   });
 
-  addTaskBtn.addEventListener('click', saveTask);
+  const saveEditedTask = (taskId) => {
+    const editTaskTextInput = document.querySelector(
+      '.edit-task-container__textarea'
+    );
+    const taskTextAfterChange = editTaskTextInput.value;
+    console.log(taskTextAfterChange);
+    tabData[taskId].text = taskTextAfterChange;
+    console.log(tabData);
+    filterTasksAccStatus();
+    closeEditTaskWindow();
+  };
+
+  const handleSaveClick = (ev) => {
+    // ten event nie jest na "Tasku",
+    // const id = getTaskId(ev);
+    // console.log('handle save click: ' + id);
+    saveEditedTask(0);
+  };
+
+  saveTaskBtn.addEventListener('click', handleSaveClick);
 
   // ----- EDIT TASK on Swipe - END
 };
@@ -329,13 +372,13 @@ searchClearBtn.addEventListener('click', clearSearchInput);
 // --- end SEARCH TASK function
 
 // --- start  ADD TASK - show window
-const openNewEditTask = () => {
+const openNewTaskWindow = () => {
   newTaskWindow.classList.remove('new-task-container-hide');
   document.body.style.overflow = 'hidden';
 };
 const newTaskWindow = document.querySelector('.new-task-container');
 const plusBtn = document.querySelector('.footer__btn-add-task');
-plusBtn.addEventListener('click', openNewEditTask);
+plusBtn.addEventListener('click', openNewTaskWindow);
 
 // Add Task - close window
 const closeNewTaskWindow = () => {
