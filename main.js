@@ -32,6 +32,7 @@ const initList = () => {
   loupe.addEventListener('click', showSearchInput);
 
   // ----- CLOSE THE TASK -Start
+  // TODO dlaczego renderClosedTasks znajduje się w initList, a nie globalnie?
   const renderClosedTasks = (currentItem, currentItemId) => {
     tabData = tabData.map((item) => {
       if (item.id.toString() === currentItemId) {
@@ -45,7 +46,8 @@ const initList = () => {
   };
   const closeTheTask = (ev) => {
     const currentItem = ev.currentTarget;
-    currentItem.parentNode.classList.toggle('task-list__task-done');
+    currentItem.parentNode.parentNode.classList.toggle('task-list__task-done');
+    console.log(currentItem.parentNode.parentNode);
     const currentItemId = currentItem.getAttribute('data-id');
     renderClosedTasks(currentItem, currentItemId);
   };
@@ -82,7 +84,7 @@ const initList = () => {
       tabData[i].id = i + 1;
     }
     showAll();
-    return tabData;
+    // return tabData;
   };
 
   const deleteTask = (ev) => {
@@ -112,15 +114,6 @@ const initList = () => {
     '.edit-task-container__btn-close-x'
   );
 
-  // const renderTaskAfterDelete = (currentItemId) => {
-  //   tabData.splice(currentItemId, 1);
-  //   for (let i = 0; i < tabData.length; i++) {
-  //     tabData[i].id = i + 1;
-  //   }
-  //   showAll();
-  //   return tabData;
-  // };
-
   const getTaskId = (ev) => {
     const currentTask = ev.currentTarget;
     const taskId = currentTask.parentNode.getAttribute('data-id') - 1;
@@ -134,11 +127,9 @@ const initList = () => {
   };
 
   const closeEditTaskWindow = () => {
+    removeSwipe();
     editTaskWindow.classList.add('edit-task-container-hide');
     document.body.style.overflow = 'visible';
-
-    filterTasksAccStatus();
-    //     filterTasksAccStatus(); currently added to close all opened swipes
   };
 
   backToListBtn.addEventListener('click', closeEditTaskWindow);
@@ -148,6 +139,7 @@ const initList = () => {
       '.edit-task-container__textarea'
     );
     openEditTaskWindow();
+    console.log('current state: ' + state.currentTaskId);
     const taskTextBeforeChange = tabData[taskId].text;
     // console.log(taskTextBeforeChange);
     editTaskTextInput.value = taskTextBeforeChange;
@@ -162,20 +154,22 @@ const initList = () => {
     pencil.addEventListener('click', handlePencilClick);
   });
 
+  // BUG attached showAll(); on close causes problem below.
+  // FIXME only first "save" works properly. Every sencond one causes warning (everytime longer) : [Violation] Forced reflow while executing JavaScript took. UWAGA: quantity of messages is alays: last result * 2.
   const saveEditedTask = () => {
     const editTaskTextInput = document.querySelector(
       '.edit-task-container__textarea'
     );
     let taskId = state.currentTaskId;
+    console.log('state current task before save: ' + state.currentTaskId);
     const taskTextAfterChange = editTaskTextInput.value;
     tabData[taskId].text = taskTextAfterChange;
-    state.currentTaskId = '';
-    filterTasksAccStatus();
+    showAll();
     closeEditTaskWindow();
   };
 
   saveTaskBtn.addEventListener('click', saveEditedTask);
-  backToListBtn.addEventListener('click', saveEditedTask);
+  // backToListBtn.addEventListener('click', saveEditedTask);
 
   closeEditTaskWindowBtn.addEventListener('click', closeEditTaskWindow);
   // ----- EDIT TASK on Swipe - END
@@ -263,6 +257,7 @@ const renderList = (items, searchText = '') => {
         // const currentTask = ev.currentTarget;
         // console.log(currentTask);
         // removeSwipe(currentTask);
+        removeSwipe();
         taskEditDelete.classList.add('active-swipe');
         taskTextContent.classList.add('active-swipe');
       }
@@ -390,12 +385,16 @@ const closeNewTaskWindow = () => {
   newTaskWindow.classList.add('new-task-container-hide');
   document.body.style.overflow = 'visible';
 };
+
+const closeAddNewTaskWindowBtn = document.querySelector(
+  '.new-task-container__btn-close-x'
+);
+closeAddNewTaskWindowBtn.addEventListener('click', closeNewTaskWindow);
+
+// --- ADD NEW TASK   -
 const backToListBtn = document.querySelector(
   '.new-task-container__btn-back-to-list'
 );
-backToListBtn.addEventListener('click', closeNewTaskWindow);
-
-// --- ADD NEW TASK   -
 const addTaskBtn = document.querySelector('.new-task-container__btn-confirm');
 const newTaskTextInput = document.querySelector(
   '.new-task-container__textarea'
@@ -414,7 +413,16 @@ const addItem = () => {
   showAll();
 };
 addTaskBtn.addEventListener('click', addItem);
+backToListBtn.addEventListener('click', addItem);
 //  end ADD TASK
+
+// REMOVE SWIPE
+const removeSwipe = () => {
+  const allSwipedTasks = document.querySelectorAll('li div.active-swipe');
+  allSwipedTasks.forEach((swipedTask) => {
+    swipedTask.classList.remove('active-swipe');
+  });
+};
 
 // On start
 showAll();
