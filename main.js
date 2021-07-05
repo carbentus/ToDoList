@@ -27,7 +27,7 @@ const initList = () => {
   searchBackBtn.addEventListener('click', closeSearchInput);
   loupe.addEventListener('click', showSearchInput);
 
-  // CLOSE THE TASK
+  // ----- CLOSE THE TASK -Start
   const renderClosedTasks = (currentItem, currentItemId) => {
     tabData = tabData.map((item) => {
       if (item.id.toString() === currentItemId) {
@@ -39,7 +39,6 @@ const initList = () => {
       return item;
     });
   };
-  // CLOSE THE TASK
   const closeTheTask = (ev) => {
     const currentItem = ev.currentTarget;
     currentItem.parentNode.classList.toggle('task-list__task-done');
@@ -51,9 +50,9 @@ const initList = () => {
   allCheckBox.forEach((checkBox) => {
     checkBox.addEventListener('click', closeTheTask);
   });
+  // ----- CLOSE THE TASK - End
 
-  // Navigation - Switch TABS  (All/Active/Completed)
-
+  // ----- Navigation - Switch TABS  (All/Active/Completed)
   const allTabs = document.querySelectorAll('.nav-status__btn');
   const allTabsArray = [...allTabs];
 
@@ -67,6 +66,71 @@ const initList = () => {
       currentItem.classList.add('nav-status__btn-active');
     });
   });
+
+  // ----- DELETE TASK on Swipe - START
+  const renderTaskAfterDelete = (currentItemId) => {
+    tabData.splice(currentItemId, 1);
+    for (let i = 0; i < tabData.length; i++) {
+      tabData[i].id = i + 1;
+    }
+    showAll();
+    return tabData;
+  };
+
+  const deleteTask = (ev) => {
+    console.log(tabData);
+    const currentItem = ev.currentTarget;
+    const currentItemId = currentItem.parentNode.getAttribute('data-id') - 1;
+    // console.log('will be deleted item nr:' + tabData[currentItemId].text);
+    renderTaskAfterDelete(currentItemId);
+    console.log(tabData);
+  };
+
+  const allTrashBin = document.querySelectorAll(
+    'button.task-list__btn-edit-delete.trash'
+  );
+  allTrashBin.forEach((trashBin) => {
+    trashBin.addEventListener('click', deleteTask);
+  });
+  // ----- DELETE TASK on Swipe - END
+
+  // ----- EDIT TASK on Swipe - START
+
+  // const renderTaskAfterDelete = (currentItemId) => {
+  //   tabData.splice(currentItemId, 1);
+  //   for (let i = 0; i < tabData.length; i++) {
+  //     tabData[i].id = i + 1;
+  //   }
+  //   showAll();
+  //   return tabData;
+  // };
+
+  const editTask = (ev) => {
+    console.log('edit');
+    const currentItem = ev.currentTarget;
+    const currentItemId = currentItem.parentNode.getAttribute('data-id') - 1;
+    console.log('To edit item nr:' + tabData[currentItemId].text);
+    const taskTextBeforeChange = tabData[currentItemId].text;
+    openNewEditTask();
+    newTaskTextInput.value = taskTextBeforeChange;
+    addTaskBtn.innerHTML = 'Save';
+  };
+
+  const saveTask = () => {
+    const taskTextAfterChange = newTaskTextInput.value;
+    console.log(taskTextAfterChange);
+  };
+
+  const allPencil = document.querySelectorAll(
+    'button.task-list__btn-edit-delete.pencil'
+  );
+  allPencil.forEach((Pencil) => {
+    Pencil.addEventListener('click', editTask);
+  });
+
+  addTaskBtn.addEventListener('click', saveTask);
+
+  // ----- EDIT TASK on Swipe - END
 };
 
 // Highlight searched text
@@ -118,50 +182,53 @@ const renderList = (items, searchText = '') => {
     const newChild = document.createElement('li');
     newChild.classList.add('task-list__task');
 
-    const newChildEditDelete = document.createElement('div');
-    newChildEditDelete.classList.add('task-list__task-edit-delete');
-    newChildEditDelete.innerHTML = `
-    <button class="task-list__btn-edit-delete"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-    <button class="task-list__btn-edit-delete">
+    const taskEditDelete = document.createElement('div');
+    taskEditDelete.classList.add('task-list__task-edit-delete');
+    taskEditDelete.setAttribute('data-id', item.id);
+    taskEditDelete.innerHTML = `
+    <button class="task-list__btn-edit-delete pencil"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+    <button class="task-list__btn-edit-delete trash">
     <i class="fa fa-trash-o" aria-hidden="true"></i></button>`;
-    console.log(newChildEditDelete);
 
     if (item.isCompleted) {
       newChild.classList.add('task-list__task-done');
     }
 
     // ITEM/TASK selection
-    newChild.setAttribute('draggable', true);
-    newChild.addEventListener('click', function () {
-      console.log('select Task funkcja działa');
-      newChild.classList.toggle('selected');
-    });
+    // newChild.setAttribute('draggable', true);
+    // newChild.addEventListener('click', function () {
+    //   console.log('select Task funkcja działa');
+    //   newChild.classList.toggle('selected');
+    // });
 
-    // Task SWIPE  START
+    // ---- Task SWIPE  START
     let touchstartX = 0;
     let touchendX = 0;
     function handleGestureX() {
       if (touchendX - touchstartX > 100) {
-        console.log('swiped right!');
-        newChildEditDelete.classList.remove('active-swipe');
-        newChildTextContent.classList.remove('active-swipe');
+        // console.log('swiped right!');
+        taskEditDelete.classList.remove('active-swipe');
+        taskTextContent.classList.remove('active-swipe');
       }
       if (touchendX - touchstartX < -100) {
-        console.log('swiped left!');
-        newChildEditDelete.classList.add('active-swipe');
-        newChildTextContent.classList.add('active-swipe');
+        // console.log('swiped left!');
+        // const currentTask = ev.currentTarget;
+        // console.log(currentTask);
+        // removeSwipe(currentTask);
+        taskEditDelete.classList.add('active-swipe');
+        taskTextContent.classList.add('active-swipe');
       }
     }
 
-    newChild.addEventListener('touchstart', (e) => {
-      touchstartX = e.changedTouches[0].screenX;
+    newChild.addEventListener('touchstart', (ev) => {
+      touchstartX = ev.changedTouches[0].screenX;
     });
 
-    newChild.addEventListener('touchend', (e) => {
-      touchendX = e.changedTouches[0].screenX;
+    newChild.addEventListener('touchend', (ev) => {
+      touchendX = ev.changedTouches[0].screenX;
       handleGestureX();
     });
-    // Task swipe END
+    // ---- Task swipe END
 
     let itemText = item.text;
     if (searchText) {
@@ -181,10 +248,10 @@ const renderList = (items, searchText = '') => {
     </div>
 		`;
 
-    const newChildTextContent = newChild.firstElementChild;
+    const taskTextContent = newChild.firstElementChild;
     listContainer.appendChild(newChild);
-    shortenLongTask(newChildTextContent);
-    newChild.appendChild(newChildEditDelete);
+    shortenLongTask(taskTextContent);
+    newChild.appendChild(taskEditDelete);
   });
 };
 
@@ -262,12 +329,13 @@ searchClearBtn.addEventListener('click', clearSearchInput);
 // --- end SEARCH TASK function
 
 // --- start  ADD TASK - show window
-const newTaskWindow = document.querySelector('.new-task-container');
-const plusBtn = document.querySelector('.footer__btn-add-task');
-plusBtn.addEventListener('click', () => {
+const openNewEditTask = () => {
   newTaskWindow.classList.remove('new-task-container-hide');
   document.body.style.overflow = 'hidden';
-});
+};
+const newTaskWindow = document.querySelector('.new-task-container');
+const plusBtn = document.querySelector('.footer__btn-add-task');
+plusBtn.addEventListener('click', openNewEditTask);
 
 // Add Task - close window
 const closeNewTaskWindow = () => {
@@ -281,11 +349,10 @@ backToListBtn.addEventListener('click', closeNewTaskWindow);
 
 // --- ADD NEW TASK   -
 const addTaskBtn = document.querySelector('.new-task-container__btn-confirm');
-
+const newTaskTextInput = document.querySelector(
+  '.new-task-container__textarea'
+);
 const addItem = () => {
-  const newTaskTextInput = document.querySelector(
-    '.new-task-container__textarea'
-  );
   const newTaskText = newTaskTextInput.value;
 
   const id = tabData.length + 1;
@@ -300,10 +367,6 @@ const addItem = () => {
 };
 addTaskBtn.addEventListener('click', addItem);
 //  end ADD TASK
-
-// START - Delete  selected Task on swipe
-
-// END - Delete selected Task on swipe
 
 // On start
 showAll();
