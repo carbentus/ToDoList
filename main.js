@@ -1,6 +1,10 @@
 const MAX_TAB_HEIGHT = 132; // 3x line height, wrap overflowing text
 let tabData = JSON.parse(document.querySelector('#data-source').innerHTML);
 
+const state = {
+  currentTaskId: '',
+};
+
 const loupe = document.querySelector('.search__btn-loupe');
 const searchInput = document.querySelector('.search__input');
 const searchBackBtn = document.querySelector('.search__btn-back');
@@ -104,6 +108,10 @@ const initList = () => {
     '.edit-task-container__btn-back-to-list'
   );
   const saveTaskBtn = document.querySelector('.edit-task-container__btn-save');
+  const closeEditTaskWindowBtn = document.querySelector(
+    '.edit-task-container__btn-close-x'
+  );
+
   // const renderTaskAfterDelete = (currentItemId) => {
   //   tabData.splice(currentItemId, 1);
   //   for (let i = 0; i < tabData.length; i++) {
@@ -116,7 +124,7 @@ const initList = () => {
   const getTaskId = (ev) => {
     const currentTask = ev.currentTarget;
     const taskId = currentTask.parentNode.getAttribute('data-id') - 1;
-    // console.log('To edit item nr:' + tabData[currentItemId].text);
+    state.currentTaskId = taskId;
     return taskId;
   };
 
@@ -128,6 +136,9 @@ const initList = () => {
   const closeEditTaskWindow = () => {
     editTaskWindow.classList.add('edit-task-container-hide');
     document.body.style.overflow = 'visible';
+
+    filterTasksAccStatus();
+    //     filterTasksAccStatus(); currently added to close all opened swipes
   };
 
   backToListBtn.addEventListener('click', closeEditTaskWindow);
@@ -144,7 +155,6 @@ const initList = () => {
 
   const handlePencilClick = (ev) => {
     const id = getTaskId(ev);
-    console.log('handle edit pencil: ' + id);
     showEditedTask(id);
   };
 
@@ -152,27 +162,22 @@ const initList = () => {
     pencil.addEventListener('click', handlePencilClick);
   });
 
-  const saveEditedTask = (taskId) => {
+  const saveEditedTask = () => {
     const editTaskTextInput = document.querySelector(
       '.edit-task-container__textarea'
     );
+    let taskId = state.currentTaskId;
     const taskTextAfterChange = editTaskTextInput.value;
-    console.log(taskTextAfterChange);
     tabData[taskId].text = taskTextAfterChange;
-    console.log(tabData);
+    state.currentTaskId = '';
     filterTasksAccStatus();
     closeEditTaskWindow();
   };
 
-  const handleSaveClick = (ev) => {
-    // ten event nie jest na "Tasku",
-    // const id = getTaskId(ev);
-    // console.log('handle save click: ' + id);
-    saveEditedTask(0);
-  };
+  saveTaskBtn.addEventListener('click', saveEditedTask);
+  backToListBtn.addEventListener('click', saveEditedTask);
 
-  saveTaskBtn.addEventListener('click', handleSaveClick);
-
+  closeEditTaskWindowBtn.addEventListener('click', closeEditTaskWindow);
   // ----- EDIT TASK on Swipe - END
 };
 
