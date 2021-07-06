@@ -163,17 +163,19 @@ const renderList = (items, searchText = '') => {
     let touchstartX = 0;
     let touchendX = 0;
     function handleGestureX() {
-      if (touchendX - touchstartX > 100) {
+      if (touchendX - touchstartX > 70) {
         taskEditDelete.classList.remove('active-swipe');
         taskTextContent.classList.remove('active-swipe');
       }
-      if (touchendX - touchstartX < -100) {
+      if (touchendX - touchstartX < -70) {
         removeSwipe();
         taskEditDelete.classList.add('active-swipe');
         taskTextContent.classList.add('active-swipe');
       }
     }
 
+    // BUG [Violation] Added non-passive event listener to a scroll-blocking <some> event. Consider marking event handler as 'passive' to make the page more responsive. See <URL>
+    // main.js:177 [Violation] Added non-passive event listener to a scroll-blocking 'touchstart' event. Consider marking event handler as 'passive' to make the page more responsive. See https://www.chromestatus.com/feature/5745543795965952
     newChild.addEventListener('touchstart', (ev) => {
       touchstartX = ev.changedTouches[0].screenX;
     });
@@ -373,9 +375,7 @@ const showEditedTask = (taskId) => {
   );
 
   openEditTaskWindow();
-  console.log('current state: ' + state.currentTaskId);
   const taskTextBeforeChange = tabData[taskId].text;
-  // console.log(taskTextBeforeChange);
   editTaskTextInput.value = taskTextBeforeChange;
 };
 
@@ -390,7 +390,6 @@ const saveEditedTask = () => {
     '.edit-task-container__textarea'
   );
   let taskId = state.currentTaskId;
-  console.log('state current task before save: ' + state.currentTaskId);
   const taskTextAfterChange = editTaskTextInput.value;
   tabData[taskId].text = taskTextAfterChange;
   filterTasksAccStatus();
