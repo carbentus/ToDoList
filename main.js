@@ -105,73 +105,9 @@ const initList = () => {
   const allPencil = document.querySelectorAll(
     'button.task-list__btn-edit-delete.pencil'
   );
-  const editTaskWindow = document.querySelector('.edit-task-container');
-  const backToListBtn = document.querySelector(
-    '.edit-task-container__btn-back-to-list'
-  );
-  const saveTaskBtn = document.querySelector('.edit-task-container__btn-save');
-  const closeEditTaskWindowBtn = document.querySelector(
-    '.edit-task-container__btn-close-x'
-  );
-
-  const getTaskId = (ev) => {
-    const currentTask = ev.currentTarget;
-    const taskId = currentTask.parentNode.getAttribute('data-id') - 1;
-    state.currentTaskId = taskId;
-    return taskId;
-  };
-
-  const openEditTaskWindow = () => {
-    editTaskWindow.classList.remove('edit-task-container-hide');
-    document.body.style.overflow = 'hidden';
-  };
-
-  const closeEditTaskWindow = () => {
-    removeSwipe();
-    editTaskWindow.classList.add('edit-task-container-hide');
-    document.body.style.overflow = 'visible';
-  };
-
-  backToListBtn.addEventListener('click', closeEditTaskWindow);
-
-  const showEditedTask = (taskId) => {
-    const editTaskTextInput = document.querySelector(
-      '.edit-task-container__textarea'
-    );
-    openEditTaskWindow();
-    console.log('current state: ' + state.currentTaskId);
-    const taskTextBeforeChange = tabData[taskId].text;
-    // console.log(taskTextBeforeChange);
-    editTaskTextInput.value = taskTextBeforeChange;
-  };
-
-  const handlePencilClick = (ev) => {
-    const id = getTaskId(ev);
-    showEditedTask(id);
-  };
-
   allPencil.forEach((pencil) => {
     pencil.addEventListener('click', handlePencilClick);
   });
-
-  // BUG attached showAll(); on close causes problem below.
-  // FIXME only first "save" works properly. Every sencond one causes warning (everytime longer) : [Violation] Forced reflow while executing JavaScript took. UWAGA: quantity of messages is alays: last result * 2.
-  const saveEditedTask = () => {
-    const editTaskTextInput = document.querySelector(
-      '.edit-task-container__textarea'
-    );
-    let taskId = state.currentTaskId;
-    console.log('state current task before save: ' + state.currentTaskId);
-    const taskTextAfterChange = editTaskTextInput.value;
-    tabData[taskId].text = taskTextAfterChange;
-    showAll();
-    closeEditTaskWindow();
-  };
-
-  saveTaskBtn.addEventListener('click', saveEditedTask);
-  // backToListBtn.addEventListener('click', saveEditedTask);
-
-  closeEditTaskWindowBtn.addEventListener('click', closeEditTaskWindow);
   // ----- EDIT TASK on Swipe - END
 };
 
@@ -248,15 +184,10 @@ const renderList = (items, searchText = '') => {
     let touchendX = 0;
     function handleGestureX() {
       if (touchendX - touchstartX > 100) {
-        // console.log('swiped right!');
         taskEditDelete.classList.remove('active-swipe');
         taskTextContent.classList.remove('active-swipe');
       }
       if (touchendX - touchstartX < -100) {
-        // console.log('swiped left!');
-        // const currentTask = ev.currentTarget;
-        // console.log(currentTask);
-        // removeSwipe(currentTask);
         removeSwipe();
         taskEditDelete.classList.add('active-swipe');
         taskTextContent.classList.add('active-swipe');
@@ -423,6 +354,75 @@ const removeSwipe = () => {
     swipedTask.classList.remove('active-swipe');
   });
 };
+
+// *** EDIT TASK ON SWIPE - Start
+
+// const allPencil = document.querySelectorAll(
+//   'button.task-list__btn-edit-delete.pencil'
+// );
+
+const backToListSaveBtn = document.querySelector(
+  '.edit-task-container__btn-back-to-list'
+);
+const saveTaskBtn = document.querySelector('.edit-task-container__btn-save');
+const closeEditTaskWindowBtn = document.querySelector(
+  '.edit-task-container__btn-close-x'
+);
+
+const getTaskId = (ev) => {
+  const currentTask = ev.currentTarget;
+  const taskId = currentTask.parentNode.getAttribute('data-id') - 1;
+  state.currentTaskId = taskId;
+  return taskId;
+};
+
+const openEditTaskWindow = () => {
+  editTaskWindow.classList.remove('edit-task-container-hide');
+  document.body.style.overflow = 'hidden';
+};
+
+const closeEditTaskWindow = () => {
+  removeSwipe();
+  editTaskWindow.classList.add('edit-task-container-hide');
+  document.body.style.overflow = 'visible';
+};
+
+const showEditedTask = (taskId) => {
+  const editTaskTextInput = document.querySelector(
+    '.edit-task-container__textarea'
+  );
+
+  openEditTaskWindow();
+  console.log('current state: ' + state.currentTaskId);
+  const taskTextBeforeChange = tabData[taskId].text;
+  // console.log(taskTextBeforeChange);
+  editTaskTextInput.value = taskTextBeforeChange;
+};
+
+const handlePencilClick = (ev) => {
+  const id = getTaskId(ev);
+  showEditedTask(id);
+};
+
+const editTaskWindow = document.querySelector('.edit-task-container');
+const saveEditedTask = () => {
+  const editTaskTextInput = document.querySelector(
+    '.edit-task-container__textarea'
+  );
+  let taskId = state.currentTaskId;
+  console.log('state current task before save: ' + state.currentTaskId);
+  const taskTextAfterChange = editTaskTextInput.value;
+  tabData[taskId].text = taskTextAfterChange;
+  filterTasksAccStatus();
+  closeEditTaskWindow();
+};
+
+// Listeners
+saveTaskBtn.addEventListener('click', saveEditedTask);
+backToListSaveBtn.addEventListener('click', saveEditedTask);
+closeEditTaskWindowBtn.addEventListener('click', closeEditTaskWindow);
+
+// *** EDIT TASK ON SWIPE - End
 
 // On start
 showAll();
