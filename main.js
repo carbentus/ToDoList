@@ -11,26 +11,6 @@ const searchBackBtn = document.querySelector('.search__btn-back');
 const searchClearBtn = document.querySelector('.search__btn-clear');
 
 const initList = () => {
-  // SEARCH INPUT
-  const showSearchInput = () => {
-    searchInput.classList.add('search__input-active');
-    loupe.classList.add('search__btn-loupe-inactive');
-    searchBackBtn.classList.add('search__btn-back-active');
-    searchClearBtn.classList.add('search__btn-clear-active');
-    searchInput.focus();
-  };
-
-  const closeSearchInput = () => {
-    searchInput.classList.remove('search__input-active');
-    loupe.classList.remove('search__btn-loupe-inactive');
-    searchBackBtn.classList.remove('search__btn-back-active');
-    searchClearBtn.classList.remove('search__btn-clear-active');
-    clearSearchInput();
-  };
-
-  searchBackBtn.addEventListener('click', closeSearchInput);
-  loupe.addEventListener('click', showSearchInput);
-
   // ----- CLOSE THE TASK -Start
   // TODO dlaczego renderClosedTasks znajduje się w initList, a nie globalnie?
   const renderClosedTasks = (currentItem, currentItemId) => {
@@ -58,7 +38,7 @@ const initList = () => {
   });
   // ----- CLOSE THE TASK - End
 
-  // ----- Navigation - Switch TABS  (All/Active/Completed)
+  // ----- Switch TABS  (All/Active/Completed)
   const allTabs = document.querySelectorAll('.nav-status__btn');
   const allTabsArray = [...allTabs];
 
@@ -73,42 +53,21 @@ const initList = () => {
     });
   });
 
-  // ----- DELETE TASK on Swipe - START
+  // ----- DELETE TASK on Swipe
   const allTrashBin = document.querySelectorAll(
     'button.task-list__btn-edit-delete.trash'
   );
-
-  const renderTaskAfterDelete = (currentItemId) => {
-    tabData.splice(currentItemId, 1);
-    for (let i = 0; i < tabData.length; i++) {
-      tabData[i].id = i + 1;
-    }
-    showAll();
-    // return tabData;
-  };
-
-  const deleteTask = (ev) => {
-    console.log(tabData);
-    const currentItem = ev.currentTarget;
-    const currentItemId = currentItem.parentNode.getAttribute('data-id') - 1;
-    // console.log('will be deleted item nr:' + tabData[currentItemId].text);
-    renderTaskAfterDelete(currentItemId);
-    console.log(tabData);
-  };
-
   allTrashBin.forEach((trashBin) => {
     trashBin.addEventListener('click', deleteTask);
   });
-  // ----- DELETE TASK on Swipe - END
 
-  // ----- EDIT TASK on Swipe - START
+  // ----- EDIT TASK on Swipe
   const allPencil = document.querySelectorAll(
     'button.task-list__btn-edit-delete.pencil'
   );
   allPencil.forEach((pencil) => {
     pencil.addEventListener('click', handlePencilClick);
   });
-  // ----- EDIT TASK on Swipe - END
 };
 
 // Highlight searched text
@@ -131,6 +90,27 @@ const resizeTaskContent = function (ev) {
     contentToExpand.classList.add('task-list__task-description--shorten');
   }
 };
+//  *** initList END
+
+// SEARCH INPUT
+const showSearchInput = () => {
+  searchInput.classList.add('search__input-active');
+  loupe.classList.add('search__btn-loupe-inactive');
+  searchBackBtn.classList.add('search__btn-back-active');
+  searchClearBtn.classList.add('search__btn-clear-active');
+  searchInput.focus();
+};
+
+const closeSearchInput = () => {
+  searchInput.classList.remove('search__input-active');
+  loupe.classList.remove('search__btn-loupe-inactive');
+  searchBackBtn.classList.remove('search__btn-back-active');
+  searchClearBtn.classList.remove('search__btn-clear-active');
+  clearSearchInput();
+};
+
+searchBackBtn.addEventListener('click', closeSearchInput);
+loupe.addEventListener('click', showSearchInput);
 
 const shortenLongTask = (task) => {
   const itemHeight = task.clientHeight;
@@ -423,6 +403,26 @@ backToListSaveBtn.addEventListener('click', saveEditedTask);
 closeEditTaskWindowBtn.addEventListener('click', closeEditTaskWindow);
 
 // *** EDIT TASK ON SWIPE - End
+
+// *** DELETE TASK on swipe - Start
+const renderTaskAfterDelete = (currentItemId) => {
+  tabData.splice(currentItemId, 1);
+  for (let i = 0; i < tabData.length; i++) {
+    tabData[i].id = i + 1;
+  }
+  showAll();
+  // return tabData;
+};
+
+const deleteTask = (ev) => {
+  console.log(tabData);
+  const currentItem = ev.currentTarget;
+  const currentItemId = currentItem.parentNode.getAttribute('data-id') - 1;
+  // console.log('will be deleted item nr:' + tabData[currentItemId].text);
+  renderTaskAfterDelete(currentItemId);
+  console.log(tabData);
+};
+// *** DELETE TASK on swipe - End
 
 // On start
 showAll();
