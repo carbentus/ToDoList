@@ -304,6 +304,7 @@ searchClearBtn.addEventListener('click', clearSearchInput);
 
 // --- start  ADD TASK - show window
 const openNewTaskWindow = () => {
+  removeSwipe();
   newTaskWindow.classList.remove('new-task-container-hide');
   document.body.style.overflow = 'hidden';
   if (loupe.classList.contains('search__btn-loupe-inactive')) {
@@ -380,6 +381,7 @@ const getTaskId = (ev) => {
 };
 
 const openEditTaskWindow = () => {
+  removeSwipe();
   editTaskWindow.classList.remove('edit-task-container-hide');
   document.body.style.overflow = 'hidden';
 };
@@ -443,6 +445,8 @@ const deleteTask = (ev) => {
   console.log(tabData);
 };
 // *** DELETE TASK on swipe - End
+
+// POP-UP JS
 
 // On start
 showAll();

@@ -76,10 +76,11 @@ body.has-mouse *:focus {
     height: 48px;
 
     .search__input {
+      display: none;
       position: absolute;
       top: 0;
       right: 0;
-      width: 0;
+      width: 100%;
       font-size: 1.4rem;
       border: none;
       border-radius: 14px;
@@ -93,8 +94,6 @@ body.has-mouse *:focus {
 
     .search__input-active {
       display: block;
-      width: 100%;
-
       padding: 16px 48px;
     }
 
@@ -138,11 +137,9 @@ body.has-mouse *:focus {
       top: 0;
       border-radius: 14px;
       border-bottom-left-radius: 0;
-      transition: width 0.1s;
     }
 
     .search__btn-loupe-inactive {
-      // display: none;
       width: 0;
       visibility: hidden;
 
@@ -512,11 +509,39 @@ body.has-mouse *:focus {
       color: $clr-ivory;
     }
   }
+  .new-task-container__modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(136, 160, 196, 0.5);
+
+    // visibility: hidden;
+    // z-index: -10;
+  }
+  .new-task-container__modal-overlay-active {
+    visibility: visible;
+    z-index: 10;
+
+    .new-task-container__modal-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      max-width: 480px;
+      height: 20%;
+      background-color: $clr-ivory;
+      padding: 32px 40px;
+      border-top: 2px solid $clr-yellow;
+      border-radius: 4px;
+    }
+  }
 }
 .new-task-container-hide,
 .edit-task-container-hide {
   transform: translateY(150%);
-  transition: transform 0.3s ease-in-out;
 }
 
 mark {

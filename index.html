@@ -101,7 +101,7 @@
         </button>
       </footer>
       <!--  NEW TASK CONTAINER -->
-      <div class="new-task-container new-task-container-hide">
+      <div class="new-task-container new-task-container-hideXXXX">
         <button class="new-task-container__btn-back-to-list">
           <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
           <p>Back to list</p>
@@ -117,6 +117,20 @@
         ></textarea>
         <div class="new-task-container__bcg-for-btn">
           <button class="new-task-container__btn-confirm">Add Task</button>
+        </div>
+        <!--  MODAL EmptyTask -->
+        <div
+          class="
+            new-task-container__modal-overlay
+            new-task-container__modal-overlay-active
+          "
+        >
+          <div class="new-task-container__modal-container">
+            <div class="new-task-container__modal-message">
+              Your task is empty. To add a new task, enter a content.
+            </div>
+            <button>Cancel</button><button>Add empty task</button>
+          </div>
         </div>
       </div>
       <!--  EDIT TASK CONTAINER -->
