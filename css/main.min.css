@@ -260,6 +260,14 @@ body.has-mouse *:focus {
   }
 }
 
+@media screen and (min-width: 768px) {
+  .container .task-list .task-list__task .task-list__text-container.active-swipe,
+  .container .task-list .task-list__task:hover .task-list__text-container {
+    -webkit-transform: translateX(-20%);
+            transform: translateX(-20%);
+  }
+}
+
 .container .task-list .task-list__task .task-list__task-edit-delete {
   display: none;
   position: absolute;
@@ -272,6 +280,12 @@ body.has-mouse *:focus {
 @media screen and (min-width: 414px) {
   .container .task-list .task-list__task .task-list__task-edit-delete {
     width: 40%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .container .task-list .task-list__task .task-list__task-edit-delete {
+    width: 20%;
   }
 }
 
@@ -310,8 +324,16 @@ body.has-mouse *:focus {
   padding-bottom: 40px;
 }
 
-.container .task-list .task-list__task-edit-delete.active-swipe,
-.container .task-list:hover .task-list__task-edit-delete {
+.container .task-list .task-list__task:hover .task-list__task-edit-delete {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.container .task-list .task-list__task .task-list__task-edit-delete.active-swipe {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -354,11 +376,6 @@ body.has-mouse *:focus {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-}
-
-.container .task-list__task:hover .task-list__text-container {
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
 }
 
 .container .task-list__task-done {

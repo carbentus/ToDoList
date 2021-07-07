@@ -243,7 +243,15 @@ body.has-mouse *:focus {
         @media screen and (min-width: 414px) {
           transform: translateX(-$task-swipe-transform-small);
         }
+        @media screen and (min-width: 768px) {
+          transform: translateX(-$task-swipe-transform-xsmall);
+        }
       }
+
+      // &:hover .task-list__text-container {
+      //   transform: translateX(-$task-swipe-transform-big);
+      //   background-color: $clr-dark-orange;
+      // }
 
       .task-list__task-edit-delete {
         display: none;
@@ -256,6 +264,11 @@ body.has-mouse *:focus {
         @media screen and (min-width: 414px) {
           width: $task-swipe-transform-small;
         }
+
+        @media screen and (min-width: 768px) {
+          width: $task-swipe-transform-xsmall;
+        }
+
         & > button {
           font-size: 30px;
           padding: 20px;
@@ -283,12 +296,17 @@ body.has-mouse *:focus {
       .task-list__task--long {
         padding-bottom: 40px;
       }
-    }
 
-    .task-list__task-edit-delete.active-swipe,
-    &:hover .task-list__task-edit-delete {
-      display: flex;
-      justify-content: center;
+      &:hover .task-list__task-edit-delete {
+        display: flex;
+        justify-content: center;
+      }
+
+      .task-list__task-edit-delete.active-swipe {
+        display: flex;
+        justify-content: center;
+        // opacity: 1;
+      }
     }
 
     .task-list__checkbox {
@@ -324,9 +342,6 @@ body.has-mouse *:focus {
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
-  }
-  .task-list__task:hover .task-list__text-container {
-    transform: translateX(-$task-swipe-transform-big);
   }
 
   .task-list__task-done {
