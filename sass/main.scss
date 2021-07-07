@@ -236,8 +236,7 @@ body.has-mouse *:focus {
         }
       }
 
-      .task-list__text-container.active-swipe,
-      &:hover .task-list__text-container {
+      .task-list__text-container.active-swipe {
         transform: translateX(-$task-swipe-transform-big);
         width: 100%;
         @media screen and (min-width: 414px) {
@@ -248,11 +247,18 @@ body.has-mouse *:focus {
         }
       }
 
-      // &:hover .task-list__text-container {
-      //   transform: translateX(-$task-swipe-transform-big);
-      //   background-color: $clr-dark-orange;
-      // }
-
+      @media (hover: hover) {
+        &:hover .task-list__text-container {
+          transform: translateX(-$task-swipe-transform-big);
+          width: 100%;
+          @media screen and (min-width: 414px) {
+            transform: translateX(-$task-swipe-transform-small);
+          }
+          @media screen and (min-width: 768px) {
+            transform: translateX(-$task-swipe-transform-xsmall);
+          }
+        }
+      }
       .task-list__task-edit-delete {
         display: none;
         position: absolute;
@@ -297,9 +303,11 @@ body.has-mouse *:focus {
         padding-bottom: 40px;
       }
 
-      &:hover .task-list__task-edit-delete {
-        display: flex;
-        justify-content: center;
+      @media (hover: hover) {
+        &:hover .task-list__task-edit-delete {
+          display: flex;
+          justify-content: center;
+        }
       }
 
       .task-list__task-edit-delete.active-swipe {

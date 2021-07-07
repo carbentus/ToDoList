@@ -163,11 +163,11 @@ const renderList = (items, searchText = '') => {
     let touchstartX = 0;
     let touchendX = 0;
     function handleGestureX() {
-      if (touchendX - touchstartX > 70) {
+      if (touchendX - touchstartX > 60) {
         taskEditDelete.classList.remove('active-swipe');
         taskTextContent.classList.remove('active-swipe');
       }
-      if (touchendX - touchstartX < -70) {
+      if (touchendX - touchstartX < -60) {
         removeSwipe();
         taskEditDelete.classList.add('active-swipe');
         taskTextContent.classList.add('active-swipe');

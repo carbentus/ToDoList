@@ -245,23 +245,42 @@ body.has-mouse *:focus {
   }
 }
 
-.container .task-list .task-list__task .task-list__text-container.active-swipe,
-.container .task-list .task-list__task:hover .task-list__text-container {
+.container .task-list .task-list__task .task-list__text-container.active-swipe {
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
   width: 100%;
 }
 
 @media screen and (min-width: 414px) {
-  .container .task-list .task-list__task .task-list__text-container.active-swipe,
-  .container .task-list .task-list__task:hover .task-list__text-container {
+  .container .task-list .task-list__task .task-list__text-container.active-swipe {
     -webkit-transform: translateX(-40%);
             transform: translateX(-40%);
   }
 }
 
 @media screen and (min-width: 768px) {
-  .container .task-list .task-list__task .task-list__text-container.active-swipe,
+  .container .task-list .task-list__task .task-list__text-container.active-swipe {
+    -webkit-transform: translateX(-20%);
+            transform: translateX(-20%);
+  }
+}
+
+@media (hover: hover) {
+  .container .task-list .task-list__task:hover .task-list__text-container {
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+@media screen and (hover: hover) and (min-width: 414px) {
+  .container .task-list .task-list__task:hover .task-list__text-container {
+    -webkit-transform: translateX(-40%);
+            transform: translateX(-40%);
+  }
+}
+
+@media screen and (hover: hover) and (min-width: 768px) {
   .container .task-list .task-list__task:hover .task-list__text-container {
     -webkit-transform: translateX(-20%);
             transform: translateX(-20%);
@@ -324,13 +343,15 @@ body.has-mouse *:focus {
   padding-bottom: 40px;
 }
 
-.container .task-list .task-list__task:hover .task-list__task-edit-delete {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+@media (hover: hover) {
+  .container .task-list .task-list__task:hover .task-list__task-edit-delete {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
 }
 
 .container .task-list .task-list__task .task-list__task-edit-delete.active-swipe {
