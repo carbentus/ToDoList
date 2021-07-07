@@ -227,13 +227,31 @@ const showAll = () => {
 };
 
 const tabActive = document.getElementById('tab-active');
-tabActive.addEventListener('click', filterActive);
+tabActive.addEventListener('click', function () {
+  if (loupe.classList.contains('search__btn-loupe-inactive')) {
+    closeSearchInput();
+  } else {
+    filterActive();
+  }
+});
 
 const tabCompleted = document.getElementById('tab-completed');
-tabCompleted.addEventListener('click', filterCompleted);
+tabCompleted.addEventListener('click', function () {
+  if (loupe.classList.contains('search__btn-loupe-inactive')) {
+    closeSearchInput();
+  } else {
+    filterCompleted();
+  }
+});
 
 const tabAll = document.getElementById('tab-all');
-tabAll.addEventListener('click', showAll);
+tabAll.addEventListener('click', function () {
+  if (loupe.classList.contains('search__btn-loupe-inactive')) {
+    closeSearchInput();
+  } else {
+    showAll();
+  }
+});
 
 // --- start SEARCH TASK function
 // const searchInput = document.getElementById('search');
@@ -288,6 +306,9 @@ searchClearBtn.addEventListener('click', clearSearchInput);
 const openNewTaskWindow = () => {
   newTaskWindow.classList.remove('new-task-container-hide');
   document.body.style.overflow = 'hidden';
+  if (loupe.classList.contains('search__btn-loupe-inactive')) {
+    closeSearchInput();
+  } else return;
 };
 const newTaskWindow = document.querySelector('.new-task-container');
 const plusBtn = document.querySelector('.footer__btn-add-task');

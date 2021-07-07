@@ -515,7 +515,7 @@ body.has-mouse *:focus {
 }
 .new-task-container-hide,
 .edit-task-container-hide {
-  transform: translateX(150%);
+  transform: translateY(150%);
   transition: transform 0.3s ease-in-out;
 }
 
