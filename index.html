@@ -101,7 +101,7 @@
         </button>
       </footer>
       <!--  NEW TASK CONTAINER -->
-      <div class="new-task-container new-task-container-hideXXXX">
+      <div class="new-task-container new-task-container-hide">
         <button class="new-task-container__btn-back-to-list">
           <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
           <p>Back to list</p>
@@ -117,19 +117,6 @@
         ></textarea>
         <div class="new-task-container__bcg-for-btn">
           <button class="new-task-container__btn-confirm">Add Task</button>
-        </div>
-        <!--  MODAL EmptyTask -->
-        <div class="new-task-container__modal-overlay">
-          <!--        new-task-container__modal-overlay-active -->
-          <div class="new-task-container__modal-container">
-            <div class="new-task-container__modal-message">
-              <span>Your task is empty. </span><br />To add a new task, enter a
-              content.
-            </div>
-            <div class="new-task-container__modal-btn-container">
-              <button class="new-task-container__btn-ok-modal">OK</button>
-            </div>
-          </div>
         </div>
       </div>
       <!--  EDIT TASK CONTAINER -->
@@ -149,6 +136,36 @@
         ></textarea>
         <div class="edit-task-container__bcg-for-btn">
           <button class="edit-task-container__btn-save">Save</button>
+        </div>
+      </div>
+      <!--  MODAL EmptyTask -->
+      <div class="container__modal-overlay">
+        <!--        new-task-container__modal-overlay-active -->
+        <div class="container__modal-container">
+          <div class="container__modal-message container__modal-message--empty">
+            <span>Your task is empty. </span><br />To add a new task, enter a
+            content.
+          </div>
+          <div
+            class="container__modal-message container__modal-message--delete"
+          >
+            Delete this task?
+          </div>
+          <div class="container__modal-btn-container">
+            <button class="container__btn-modal container__btn-modal-ok">
+              ok
+            </button>
+            <button
+              class="container__btn-modal container__btn-modal-delete active"
+            >
+              delete
+            </button>
+            <button
+              class="container__btn-modal container__btn-modal-ok-cancel active"
+            >
+              cancel
+            </button>
+          </div>
         </div>
       </div>
     </div>

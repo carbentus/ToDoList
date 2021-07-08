@@ -303,14 +303,10 @@ searchClearBtn.addEventListener('click', clearSearchInput);
 // --- end SEARCH TASK function
 
 // POP-UPS
-const okBtnAddTaskModal = document.querySelector(
-  '.new-task-container__btn-ok-modal'
-);
-const modalAddTask = document.querySelector(
-  '.new-task-container__modal-overlay'
-);
+const okBtnAddTaskModal = document.querySelector('.container__btn-modal-ok');
+const modalAddTask = document.querySelector('.container__modal-overlay');
 handleOkBtn = () => {
-  modalAddTask.classList.remove('new-task-container__modal-overlay-active');
+  modalAddTask.classList.remove('container__modal-overlay-active');
 };
 okBtnAddTaskModal.addEventListener('click', handleOkBtn);
 
@@ -359,7 +355,7 @@ const addItem = () => {
     closeNewTaskWindow();
     showAll();
   } else {
-    modalAddTask.classList.add('new-task-container__modal-overlay-active');
+    modalAddTask.classList.add('container__modal-overlay-active');
   }
 };
 addTaskBtn.addEventListener('click', addItem);
