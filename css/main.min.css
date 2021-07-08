@@ -307,7 +307,7 @@ body.has-mouse *:focus {
 }
 
 .container .task-list .task-list__task .task-list__task-edit-delete > button {
-  font-size: 30px;
+  font-size: 3rem;
   padding: 20px;
 }
 
@@ -366,7 +366,7 @@ body.has-mouse *:focus {
 }
 
 .container .task-list .task-list__checkbox + label {
-  border: 2px solid #3296a0;
+  border: 2px solid #1b99a5;
   border-radius: 50%;
   color: #f8f7f3;
   height: 22px;
@@ -379,8 +379,8 @@ body.has-mouse *:focus {
 }
 
 .container .task-list .task-list__checkbox:checked + label {
-  background-color: #3296a0;
-  font-size: 12px;
+  background-color: #1b99a5;
+  font-size: 1.2rem;
 }
 
 .container .task-list .task-list__task-description {
@@ -422,7 +422,7 @@ body.has-mouse *:focus {
   background-color: #23272f;
   border: none;
   border-radius: 50%;
-  font-size: 25px;
+  font-size: 2.5rem;
 }
 
 .btn-round .btn-round__icon {
@@ -610,7 +610,9 @@ body.has-mouse *:focus {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(136, 160, 196, 0.5);
+  background-color: rgba(35, 39, 47, 0.7);
+  visibility: hidden;
+  z-index: -10;
 }
 
 .new-task-container .new-task-container__modal-overlay-active,
@@ -626,13 +628,45 @@ body.has-mouse *:focus {
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  width: 80%;
+  width: 90%;
   max-width: 480px;
-  height: 20%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   background-color: #f8f7f3;
-  padding: 32px 40px;
+  padding: 16px 32px;
   border-top: 2px solid #fdc32c;
-  border-radius: 4px;
+  border-radius: 10px;
+  font-size: 1.6rem;
+  text-align: center;
+  line-height: 3rem;
+}
+
+.new-task-container .new-task-container__modal-overlay-active .new-task-container__modal-container .new-task-container__modal-message,
+.new-task-container .new-task-container__modal-overlay-active .new-task-container__modal-container .new-task-container__modal-btn-container,
+.edit-task-container .new-task-container__modal-overlay-active .new-task-container__modal-container .new-task-container__modal-message,
+.edit-task-container .new-task-container__modal-overlay-active .new-task-container__modal-container .new-task-container__modal-btn-container {
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
+  margin: 16px 16px;
+}
+
+.new-task-container .new-task-container__modal-overlay-active .new-task-container__modal-container span,
+.edit-task-container .new-task-container__modal-overlay-active .new-task-container__modal-container span {
+  font-weight: bold;
+}
+
+.new-task-container .new-task-container__modal-overlay-active .new-task-container__modal-container .new-task-container__btn-ok-modal,
+.edit-task-container .new-task-container__modal-overlay-active .new-task-container__modal-container .new-task-container__btn-ok-modal {
+  color: #23272f;
+  font-weight: bold;
+  width: 100%;
+  padding: 1.4rem;
+  border: 1px solid #23272f;
+  border-radius: 2px;
+  font-family: 'Nunito', sans-serif;
 }
 
 .new-task-container-hide,
@@ -646,6 +680,6 @@ mark {
 }
 
 #text {
-  font-size: 16px;
+  font-size: 1.6rem;
 }
 /*# sourceMappingURL=main.min.css.map */

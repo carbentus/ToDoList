@@ -302,6 +302,18 @@ const clearSearchInput = () => {
 searchClearBtn.addEventListener('click', clearSearchInput);
 // --- end SEARCH TASK function
 
+// POP-UPS
+const okBtnAddTaskModal = document.querySelector(
+  '.new-task-container__btn-ok-modal'
+);
+const modalAddTask = document.querySelector(
+  '.new-task-container__modal-overlay'
+);
+handleOkBtn = () => {
+  modalAddTask.classList.remove('new-task-container__modal-overlay-active');
+};
+okBtnAddTaskModal.addEventListener('click', handleOkBtn);
+
 // --- start  ADD TASK - show window
 const openNewTaskWindow = () => {
   removeSwipe();
@@ -336,19 +348,22 @@ const newTaskTextInput = document.querySelector(
 );
 const addItem = () => {
   const newTaskText = newTaskTextInput.value;
-
-  const id = tabData.length + 1;
-  tabData.push({
-    id,
-    isCompleted: false,
-    text: newTaskText,
-  });
-  newTaskTextInput.value = '';
-  closeNewTaskWindow();
-  showAll();
+  if (newTaskText) {
+    const id = tabData.length + 1;
+    tabData.push({
+      id,
+      isCompleted: false,
+      text: newTaskText,
+    });
+    newTaskTextInput.value = '';
+    closeNewTaskWindow();
+    showAll();
+  } else {
+    modalAddTask.classList.add('new-task-container__modal-overlay-active');
+  }
 };
 addTaskBtn.addEventListener('click', addItem);
-backToListBtn.addEventListener('click', addItem);
+backToListBtn.addEventListener('click', closeNewTaskWindow);
 //  end ADD TASK
 
 // REMOVE SWIPE
@@ -445,8 +460,6 @@ const deleteTask = (ev) => {
   console.log(tabData);
 };
 // *** DELETE TASK on swipe - End
-
-// POP-UP JS
 
 // On start
 showAll();

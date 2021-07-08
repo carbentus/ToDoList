@@ -119,17 +119,16 @@
           <button class="new-task-container__btn-confirm">Add Task</button>
         </div>
         <!--  MODAL EmptyTask -->
-        <div
-          class="
-            new-task-container__modal-overlay
-            new-task-container__modal-overlay-active
-          "
-        >
+        <div class="new-task-container__modal-overlay">
+          <!--        new-task-container__modal-overlay-active -->
           <div class="new-task-container__modal-container">
             <div class="new-task-container__modal-message">
-              Your task is empty. To add a new task, enter a content.
+              <span>Your task is empty. </span><br />To add a new task, enter a
+              content.
             </div>
-            <button>Cancel</button><button>Add empty task</button>
+            <div class="new-task-container__modal-btn-container">
+              <button class="new-task-container__btn-ok-modal">OK</button>
+            </div>
           </div>
         </div>
       </div>
