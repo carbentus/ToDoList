@@ -512,6 +512,8 @@ body.has-mouse *:focus {
   transform: translateY(150%);
 }
 
+// MODAL
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -530,11 +532,12 @@ body.has-mouse *:focus {
 
 .modal-overlay__window {
   position: absolute;
+  justify-content: center;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 90%;
   max-width: 480px;
+  width: 90%;
   display: flex;
   flex-wrap: wrap;
   background-color: $clr-ivory;
@@ -556,7 +559,6 @@ body.has-mouse *:focus {
       flex-basis: 100%;
     }
   }
-
   &__message {
     margin: 16px 8px 32px;
   }
@@ -578,9 +580,9 @@ body.has-mouse *:focus {
     border: 1px solid $clr-dark-gray;
     border-radius: 14px;
     text-transform: uppercase;
-    &:hover {
-      border: 2px solid $clr-yellow;
-    }
+    // &:hover {
+    //   border: 2px solid $clr-yellow;
+    // }
     &--dark {
       color: $clr-ivory;
       background-color: $clr-dark-gray;

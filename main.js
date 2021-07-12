@@ -303,34 +303,33 @@ searchClearBtn.addEventListener('click', clearSearchInput);
 // --- end SEARCH TASK function
 
 // Modal
-const modalAddTask = document.querySelector('.container__modal-overlay');
-const modalMessageEmpty = document.querySelector(
-  '.container__modal-message--empty'
+const modalOverlay = document.querySelector('.modal-overlay');
+const modalEmpty = document.querySelector('.modal-container-empty');
+const modalDelete = document.querySelector('.modal-container-delete');
+
+const modalBtnOk = document.querySelector('.modal-container-empty__btn-ok');
+const modalBtnDelete = document.querySelector(
+  '.modal-container-delete__btn-delete'
 );
-const modalMessageDelete = document.querySelector(
-  '.container__modal-message--delete'
-);
-const okBtnModal = document.querySelector('.container__btn-modal-ok');
-const deleteBtnModal = document.querySelector('.container__btn-modal-delete');
-const cancelBtnModal = document.querySelector(
-  '.container__btn-modal-ok-cancel'
+const modalBtnCancel = document.querySelector(
+  '.modal-container-delete__btn-cancel'
 );
 
 const showModalEmpty = () => {
-  modalAddTask.classList.add('active');
-  modalMessageEmpty.classList.add('active');
-  modalMessageDelete.classList.remove('active');
-  okBtnModal.classList.add('active');
-  deleteBtnModal.classList.remove('active');
-  cancelBtnModal.classList.remove('active');
+  modalOverlay.classList.add('modal-overlay--active');
+  modalEmpty.classList.add('modal-container-empty--active');
 };
 
-const showModalDelete = () => {};
-
-handleModalOkBtn = () => {
-  modalAddTask.classList.remove('active');
+const showModalDelete = () => {
+  modalOverlay.classList.add('modal-overlay--active');
+  modalDelete.classList.add('modal-container-delete--active');
 };
-// okBtnModal.addEventListener('click', handleModalOkBtn);
+
+handleModalBtnOk = () => {
+  modalOverlay.classList.remove('modal-overlay--active');
+  modalEmpty.classList.add('modal-container-empty--active');
+};
+modalBtnOk.addEventListener('click', handleModalBtnOk);
 
 // --- start  ADD TASK - show window
 const openNewTaskWindow = () => {
@@ -377,7 +376,6 @@ const addItem = () => {
     closeNewTaskWindow();
     showAll();
   } else {
-    console.log('oiszki');
     showModalEmpty();
   }
 };
@@ -453,7 +451,7 @@ const saveEditedTask = () => {
     filterTasksAccStatus();
     closeEditTaskWindow();
   } else {
-    modalAddTask.classList.add('container__modal-overlay-active');
+    showModalEmpty();
   }
 };
 

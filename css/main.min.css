@@ -627,12 +627,15 @@ body.has-mouse *:focus {
 
 .modal-overlay__window {
   position: absolute;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  width: 90%;
   max-width: 480px;
+  width: 90%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -694,10 +697,6 @@ body.has-mouse *:focus {
   border: 1px solid #3d3e4e;
   border-radius: 14px;
   text-transform: uppercase;
-}
-
-.modal-btns-container__btn:hover {
-  border: 2px solid #fdc32c;
 }
 
 .modal-btns-container__btn--dark {
