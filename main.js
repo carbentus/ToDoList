@@ -58,7 +58,7 @@ const initList = () => {
     'button.task-list__btn-edit-delete.trash'
   );
   allTrashBin.forEach((trashBin) => {
-    trashBin.addEventListener('click', deleteTask);
+    trashBin.addEventListener('click', showModalDelete);
   });
 
   // ----- EDIT TASK on Swipe
@@ -302,6 +302,27 @@ const clearSearchInput = () => {
 searchClearBtn.addEventListener('click', clearSearchInput);
 // --- end SEARCH TASK function
 
+// *** DELETE TASK on swipe - Start
+const renderTaskAfterDelete = (currentItemId) => {
+  tabData.splice(currentItemId, 1);
+  for (let i = 0; i < tabData.length; i++) {
+    tabData[i].id = i + 1;
+  }
+  showAll();
+  // return tabData;
+};
+
+const deleteTask = (ev) => {
+  console.log(tabData);
+  hideModalDelete();
+  const currentItem = ev.currentTarget;
+  const currentItemId = currentItem.parentNode.getAttribute('data-id') - 1;
+  // console.log('will be deleted item nr:' + tabData[currentItemId].text);
+  renderTaskAfterDelete(currentItemId);
+  console.log(tabData);
+};
+// *** DELETE TASK on swipe - End
+
 // Modal
 const modalOverlay = document.querySelector('.modal-overlay');
 const modalEmpty = document.querySelector('.modal-container-empty');
@@ -316,20 +337,30 @@ const modalBtnCancel = document.querySelector(
 );
 
 const showModalEmpty = () => {
+  removeSwipe();
   modalOverlay.classList.add('modal-overlay--active');
   modalEmpty.classList.add('modal-container-empty--active');
 };
 
+const hideModalEmpty = () => {
+  modalOverlay.classList.remove('modal-overlay--active');
+  modalEmpty.classList.remove('modal-container-empty--active');
+};
+
+modalBtnOk.addEventListener('click', hideModalEmpty);
+
 const showModalDelete = () => {
+  removeSwipe();
   modalOverlay.classList.add('modal-overlay--active');
   modalDelete.classList.add('modal-container-delete--active');
 };
 
-handleModalBtnOk = () => {
+const hideModalDelete = () => {
   modalOverlay.classList.remove('modal-overlay--active');
-  modalEmpty.classList.add('modal-container-empty--active');
+  modalDelete.classList.remove('modal-container-empty--active');
 };
-modalBtnOk.addEventListener('click', handleModalBtnOk);
+modalBtnDelete.addEventListener('click', deleteTask);
+modalBtnCancel.addEventListener('click', hideModalDelete);
 
 // --- start  ADD TASK - show window
 const openNewTaskWindow = () => {
@@ -461,26 +492,6 @@ backToListSaveBtn.addEventListener('click', saveEditedTask);
 closeEditTaskWindowBtn.addEventListener('click', closeEditTaskWindow);
 
 // *** EDIT TASK ON SWIPE - End
-
-// *** DELETE TASK on swipe - Start
-const renderTaskAfterDelete = (currentItemId) => {
-  tabData.splice(currentItemId, 1);
-  for (let i = 0; i < tabData.length; i++) {
-    tabData[i].id = i + 1;
-  }
-  showAll();
-  // return tabData;
-};
-
-const deleteTask = (ev) => {
-  console.log(tabData);
-  const currentItem = ev.currentTarget;
-  const currentItemId = currentItem.parentNode.getAttribute('data-id') - 1;
-  // console.log('will be deleted item nr:' + tabData[currentItemId].text);
-  renderTaskAfterDelete(currentItemId);
-  console.log(tabData);
-};
-// *** DELETE TASK on swipe - End
 
 // On start
 showAll();
