@@ -47,9 +47,9 @@ const initList = () => {
       const currentItem = ev.currentTarget;
 
       allTabsArray.forEach((tab) => {
-        tab.classList.remove('nav-status__btn-active');
+        tab.classList.remove('nav-status__btn--active');
       });
-      currentItem.classList.add('nav-status__btn-active');
+      currentItem.classList.add('nav-status__btn--active');
     });
   });
 
@@ -94,18 +94,18 @@ const resizeTaskContent = function (ev) {
 
 // SEARCH INPUT
 const showSearchInput = () => {
-  searchInput.classList.add('search__input-active');
-  loupe.classList.add('search__btn-loupe-inactive');
-  searchBackBtn.classList.add('search__btn-back-active');
-  searchClearBtn.classList.add('search__btn-clear-active');
+  searchInput.classList.add('search__input---active');
+  loupe.classList.add('search__btn-loupe--inactive');
+  searchBackBtn.classList.add('search__btn-back--active');
+  searchClearBtn.classList.add('search__btn-clear--active');
   searchInput.focus();
 };
 
 const closeSearchInput = () => {
-  searchInput.classList.remove('search__input-active');
-  loupe.classList.remove('search__btn-loupe-inactive');
-  searchBackBtn.classList.remove('search__btn-back-active');
-  searchClearBtn.classList.remove('search__btn-clear-active');
+  searchInput.classList.remove('search__input---active');
+  loupe.classList.remove('search__btn-loupe--inactive');
+  searchBackBtn.classList.remove('search__btn-back--active');
+  searchClearBtn.classList.remove('search__btn-clear--active');
   clearSearchInput();
 };
 
@@ -228,7 +228,7 @@ const showAll = () => {
 
 const tabActive = document.getElementById('tab-active');
 tabActive.addEventListener('click', function () {
-  if (loupe.classList.contains('search__btn-loupe-inactive')) {
+  if (loupe.classList.contains('search__btn-loupe--inactive')) {
     closeSearchInput();
   } else {
     filterActive();
@@ -237,7 +237,7 @@ tabActive.addEventListener('click', function () {
 
 const tabCompleted = document.getElementById('tab-completed');
 tabCompleted.addEventListener('click', function () {
-  if (loupe.classList.contains('search__btn-loupe-inactive')) {
+  if (loupe.classList.contains('search__btn-loupe--inactive')) {
     closeSearchInput();
   } else {
     filterCompleted();
@@ -246,7 +246,7 @@ tabCompleted.addEventListener('click', function () {
 
 const tabAll = document.getElementById('tab-all');
 tabAll.addEventListener('click', function () {
-  if (loupe.classList.contains('search__btn-loupe-inactive')) {
+  if (loupe.classList.contains('search__btn-loupe--inactive')) {
     closeSearchInput();
   } else {
     showAll();
@@ -257,7 +257,7 @@ tabAll.addEventListener('click', function () {
 // const searchInput = document.getElementById('search');
 const filterSearchTask = (ev) => {
   const searchText = ev.target.value.toLowerCase();
-  if (tabActive.classList.contains('nav-status__btn-active')) {
+  if (tabActive.classList.contains('nav-status__btn--active')) {
     renderList(
       tabData.filter(
         (item) =>
@@ -265,7 +265,7 @@ const filterSearchTask = (ev) => {
       ),
       searchText
     );
-  } else if (tabCompleted.classList.contains('nav-status__btn-active')) {
+  } else if (tabCompleted.classList.contains('nav-status__btn--active')) {
     renderList(
       tabData.filter(
         (item) =>
@@ -285,9 +285,9 @@ document
   .addEventListener('input', filterSearchTask);
 
 const filterTasksAccStatus = () => {
-  if (tabActive.classList.contains('nav-status__btn-active')) {
+  if (tabActive.classList.contains('nav-status__btn--active')) {
     filterActive();
-  } else if (tabCompleted.classList.contains('nav-status__btn-active')) {
+  } else if (tabCompleted.classList.contains('nav-status__btn--active')) {
     filterCompleted();
   } else {
     showAll();
@@ -338,26 +338,26 @@ const modalBtnCancel = document.querySelector(
 
 const showModalEmpty = () => {
   removeSwipe();
-  modalOverlay.classList.add('modal-overlay--active');
-  modalEmpty.classList.add('modal-container-empty--active');
+  modalOverlay.classList.add('modal-overlay---active');
+  modalEmpty.classList.add('modal-container-empty---active');
 };
 
 const hideModalEmpty = () => {
-  modalOverlay.classList.remove('modal-overlay--active');
-  modalEmpty.classList.remove('modal-container-empty--active');
+  modalOverlay.classList.remove('modal-overlay---active');
+  modalEmpty.classList.remove('modal-container-empty---active');
 };
 
 modalBtnOk.addEventListener('click', hideModalEmpty);
 
 const showModalDelete = () => {
   removeSwipe();
-  modalOverlay.classList.add('modal-overlay--active');
-  modalDelete.classList.add('modal-container-delete--active');
+  modalOverlay.classList.add('modal-overlay---active');
+  modalDelete.classList.add('modal-container-delete---active');
 };
 
 const hideModalDelete = () => {
-  modalOverlay.classList.remove('modal-overlay--active');
-  modalDelete.classList.remove('modal-container-empty--active');
+  modalOverlay.classList.remove('modal-overlay---active');
+  modalDelete.classList.remove('modal-container-empty---active');
 };
 modalBtnDelete.addEventListener('click', deleteTask);
 modalBtnCancel.addEventListener('click', hideModalDelete);
@@ -367,7 +367,7 @@ const openNewTaskWindow = () => {
   removeSwipe();
   newTaskWindow.classList.remove('new-task-container-hide');
   document.body.style.overflow = 'hidden';
-  if (loupe.classList.contains('search__btn-loupe-inactive')) {
+  if (loupe.classList.contains('search__btn-loupe--inactive')) {
     closeSearchInput();
   } else return;
 };
