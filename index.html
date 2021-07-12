@@ -138,12 +138,50 @@
           <button class="edit-task-container__btn-save">Save</button>
         </div>
       </div>
-      <!--  MODAL EmptyTask -->
+      <!-- MODAL -->
+
+      <div class="modal-overlay modal-overlay--active">
+        <div class="modal-overlay__window">
+          <!-- EMPTY -->
+          <!-- modal-container-empty--active -->
+          <div class="modal-container-empty modal-container-empty--active">
+            <div class="modal-container-empty__message">
+              To save a task, enter a content.
+            </div>
+            <div
+              class="modal-container-empty__btns-container modal-btns-container"
+            >
+              <button class="modal-btns-container__btn">ok</button>
+            </div>
+          </div>
+          <!-- DELETE -->
+          <!-- modal-container-delete--active -->
+          <div class="modal-container-delete">
+            <div class="modal-container-delete__message">Delete this task?</div>
+            <div
+              class="
+                modal-container-delete__btns-container
+                modal-btns-container
+              "
+            >
+              <button
+                class="
+                  modal-btns-container__btn modal-btns-container__btn--dark
+                "
+              >
+                delete
+              </button>
+              <button class="modal-btns-container__btn">cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- *
       <div class="container__modal-overlay">
-        <!--        new-task-container__modal-overlay-active -->
+    
         <div class="container__modal-container">
           <div class="container__modal-message container__modal-message--empty">
-            <span>Your task is empty. </span><br />To add a new task, enter a
+            <span>Your task is empty. </span><br />To save a task, enter a
             content.
           </div>
           <div
@@ -168,6 +206,7 @@
           </div>
         </div>
       </div>
+     -->
     </div>
     <!-- <script
       src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.13.0/Sortable.min.js"

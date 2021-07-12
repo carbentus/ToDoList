@@ -362,77 +362,6 @@ body.has-mouse *:focus {
       padding-right: 32px;
     }
   }
-  // MODAL
-  .container__modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(24, 26, 31, 0.7);
-    visibility: hidden;
-    z-index: -10;
-  }
-  .container__modal-overlay-active {
-    visibility: visible;
-    z-index: 10;
-
-    .container__modal-container {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 90%;
-      max-width: 480px;
-      display: flex;
-      flex-wrap: wrap;
-      background-color: $clr-ivory;
-      padding: 16px 32px;
-      border-top: 3px solid $clr-yellow;
-      border-radius: 10px;
-      font-size: 1.6rem;
-      text-align: center;
-      line-height: 3rem;
-
-      .container__modal-message,
-      .container__modal-btn-container {
-        flex-basis: 100%;
-        margin: 16px 16px;
-      }
-
-      .container__modal-message span {
-        font-weight: bold;
-      }
-
-      .container__modal-btn-container {
-        .container__btn-modal {
-          display: none;
-          color: $clr-dark-gray;
-          font-weight: bold;
-          width: 100%;
-          padding: 1.4rem;
-          border: 1px solid $clr-dark-gray;
-          border-radius: 14px;
-          text-transform: uppercase;
-          font-family: 'Nunito', sans-serif;
-        }
-
-        .container__btn-modal:hover {
-          border: 2px solid $clr-yellow;
-        }
-
-        .container__btn-modal.active {
-          display: block;
-        }
-
-        .container__btn-modal-delete {
-          color: $clr-ivory;
-          background-color: $clr-dark-gray;
-          margin-bottom: 1.6rem;
-        }
-      }
-    }
-  }
 }
 
 .btn-round {
@@ -581,6 +510,83 @@ body.has-mouse *:focus {
 .new-task-container-hide,
 .edit-task-container-hide {
   transform: translateY(150%);
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(24, 26, 31, 0.7);
+  visibility: hidden;
+  z-index: -10;
+
+  &--active {
+    visibility: visible;
+    z-index: 10;
+  }
+}
+
+.modal-overlay__window {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 480px;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: $clr-ivory;
+  padding: 16px 32px;
+  border-top: 3px solid $clr-yellow;
+  border-radius: 10px;
+  font-size: 2rem;
+  text-align: center;
+  line-height: 3rem;
+}
+
+.modal-container-empty,
+.modal-container-delete {
+  display: none;
+  &--active {
+    display: flex;
+    flex-wrap: wrap;
+    & > * {
+      flex-basis: 100%;
+    }
+  }
+
+  &__message {
+    margin: 16px 8px 32px;
+  }
+
+  &__btns-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+.modal-btns-container {
+  &__btn {
+    flex-basis: 100%;
+    margin: 4px 0;
+    color: $clr-dark-gray;
+    font-weight: bold;
+    padding: 1.4rem;
+    border: 1px solid $clr-dark-gray;
+    border-radius: 14px;
+    text-transform: uppercase;
+    &:hover {
+      border: 2px solid $clr-yellow;
+    }
+    &--dark {
+      color: $clr-ivory;
+      background-color: $clr-dark-gray;
+      margin-bottom: 1.6rem;
+    }
+  }
 }
 
 mark {

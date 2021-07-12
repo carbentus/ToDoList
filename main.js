@@ -302,13 +302,35 @@ const clearSearchInput = () => {
 searchClearBtn.addEventListener('click', clearSearchInput);
 // --- end SEARCH TASK function
 
-// POP-UPS
-const okBtnAddTaskModal = document.querySelector('.container__btn-modal-ok');
+// Modal
 const modalAddTask = document.querySelector('.container__modal-overlay');
-handleOkBtn = () => {
-  modalAddTask.classList.remove('container__modal-overlay-active');
+const modalMessageEmpty = document.querySelector(
+  '.container__modal-message--empty'
+);
+const modalMessageDelete = document.querySelector(
+  '.container__modal-message--delete'
+);
+const okBtnModal = document.querySelector('.container__btn-modal-ok');
+const deleteBtnModal = document.querySelector('.container__btn-modal-delete');
+const cancelBtnModal = document.querySelector(
+  '.container__btn-modal-ok-cancel'
+);
+
+const showModalEmpty = () => {
+  modalAddTask.classList.add('active');
+  modalMessageEmpty.classList.add('active');
+  modalMessageDelete.classList.remove('active');
+  okBtnModal.classList.add('active');
+  deleteBtnModal.classList.remove('active');
+  cancelBtnModal.classList.remove('active');
 };
-okBtnAddTaskModal.addEventListener('click', handleOkBtn);
+
+const showModalDelete = () => {};
+
+handleModalOkBtn = () => {
+  modalAddTask.classList.remove('active');
+};
+// okBtnModal.addEventListener('click', handleModalOkBtn);
 
 // --- start  ADD TASK - show window
 const openNewTaskWindow = () => {
@@ -355,7 +377,8 @@ const addItem = () => {
     closeNewTaskWindow();
     showAll();
   } else {
-    modalAddTask.classList.add('container__modal-overlay-active');
+    console.log('oiszki');
+    showModalEmpty();
   }
 };
 addTaskBtn.addEventListener('click', addItem);
@@ -425,9 +448,13 @@ const saveEditedTask = () => {
   );
   let taskId = state.currentTaskId;
   const taskTextAfterChange = editTaskTextInput.value;
-  tabData[taskId].text = taskTextAfterChange;
-  filterTasksAccStatus();
-  closeEditTaskWindow();
+  if (taskTextAfterChange) {
+    tabData[taskId].text = taskTextAfterChange;
+    filterTasksAccStatus();
+    closeEditTaskWindow();
+  } else {
+    modalAddTask.classList.add('container__modal-overlay-active');
+  }
 };
 
 // Listeners
